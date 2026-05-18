@@ -3,9 +3,11 @@ package GUI;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -79,7 +81,19 @@ public class RegisterScene {
         pw.textProperty().addListener((obs, oldVal, newVal) -> errorLabel.setVisible(false));
         pwConfirm.textProperty().addListener((obs, oldVal, newVal) -> errorLabel.setVisible(false));
 
-        root.getChildren().addAll(title, id, pw, pwConfirm, errorLabel, registerBtn);
+        // Back to login link
+        Label prefix = new Label("이미 계정이 있으신가요?");
+        prefix.setStyle("-fx-text-fill: #857d70; -fx-font-size: 12px;");
+
+        Hyperlink backLink = new Hyperlink("로그인");
+        backLink.getStyleClass().add("login-link");
+        backLink.setOnAction(e -> SceneManager.showLogin());
+
+        HBox linkRow = new HBox(prefix, backLink);
+        linkRow.getStyleClass().add("login-link-row");
+        linkRow.setAlignment(Pos.CENTER);
+
+        root.getChildren().addAll(title, id, pw, pwConfirm, errorLabel, registerBtn, linkRow);
 
         return root;
     }
