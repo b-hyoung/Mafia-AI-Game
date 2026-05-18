@@ -75,9 +75,7 @@ public class LoginScene {
         // Sub-links (signup / find password) — UI only, no behavior yet
         Hyperlink signupLink = new Hyperlink("회원가입");
         signupLink.getStyleClass().add("login-link");
-        signupLink.setOnAction(e -> {
-            // TODO: 회원가입 화면 연결
-        });
+        signupLink.setOnAction(e -> SceneManager.showRegister());
 
         Label sep = new Label("|");
         sep.getStyleClass().add("login-link-sep");
