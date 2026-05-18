@@ -15,7 +15,7 @@ public class MainGame extends Application {
         SceneManager.showLogin();
         SceneManager.LoginSize();
 
-        stage.setTitle("마피아 in AI");
+        stage.setTitle("Mafia for Java");
         stage.show();
     }
 
