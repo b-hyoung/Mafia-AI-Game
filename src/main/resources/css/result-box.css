@@ -1,0 +1,59 @@
+/* === Mafia for Java — Result Box ===
+   JavaFX uses -fx- prefix on all CSS properties.
+
+   Modes:
+     .result-box-success  — wine accent (#a83a3a)
+     .result-box-fail     — soft red accent (#c4554d)
+*/
+
+.result-box {
+    -fx-background-color: #faf8f4;
+    -fx-padding: 24 28 20 28;
+    -fx-spacing: 14;
+    -fx-alignment: center;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: #e5e1d6;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.18), 16, 0, 0, 4);
+}
+
+.result-box-title {
+    -fx-font-family: "Copperplate", "Apple SD Gothic Neo", serif;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.result-box-message {
+    -fx-font-family: "Helvetica Neue", "Apple SD Gothic Neo", sans-serif;
+    -fx-font-size: 13px;
+    -fx-text-fill: #3b2a1a;
+}
+
+.result-box-btn {
+    -fx-background-color: transparent;
+    -fx-border-width: 1;
+    -fx-pref-width: 200;
+    -fx-pref-height: 36;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+}
+
+/* === success mode === */
+.result-box-success .result-box-title { -fx-text-fill: #a83a3a; }
+.result-box-success .result-box-btn   { -fx-text-fill: #a83a3a; -fx-border-color: #a83a3a; }
+.result-box-success .result-box-btn:hover {
+    -fx-background-color: #a83a3a;
+    -fx-text-fill: #faf8f4;
+}
+
+/* === fail mode === */
+.result-box-fail .result-box-title { -fx-text-fill: #c4554d; }
+.result-box-fail .result-box-btn   { -fx-text-fill: #c4554d; -fx-border-color: #c4554d; }
+.result-box-fail .result-box-btn:hover {
+    -fx-background-color: #c4554d;
+    -fx-text-fill: #faf8f4;
+}
