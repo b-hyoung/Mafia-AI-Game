@@ -1,88 +1,106 @@
 /* === Mafia for Java — Login Scene ===
    JavaFX uses -fx- prefix on all CSS properties.
+
+   Modern light theme (toned-down vintage).
+   Type roles:
+     title  Avenir Next 900 — display, distinctive
+     body   SF Pro Text / Helvetica Neue / Apple SD Gothic Neo
+            (Korean glyphs fall back cleanly via Apple SD Gothic Neo)
    Color tokens:
-     bg          #0a0a0a
-     surface     #1a1a1a
-     text        #e8e8e8
-     text-muted  #8a8a8a
-     accent-gold #c9a961
-     accent-red  #8b0000
+     bg           #faf8f4  (warm off-white)
+     surface      #ffffff  (clean white for fields)
+     border       #e5e1d6  (soft warm grey)
+     text         #2a2620  (warm charcoal)
+     text-muted   #857d70  (neutral grey-brown — links)
+     prompt       #b0a89a  (faded — placeholder)
+     accent       #a83a3a  (modern wine — title/button)
+     error        #c4554d  (softer brick red)
 */
 
 .login-root {
-    -fx-background-color: #0a0a0a;
+    -fx-background-color: #faf8f4;
     -fx-padding: 40 40 40 40;
     -fx-alignment: center;
     -fx-spacing: 16;
 }
 
 .login-title {
-    -fx-font-family: "Georgia";
-    -fx-font-size: 42px;
+    -fx-font-family: "Copperplate", "Copperplate Gothic Bold", "Apple SD Gothic Neo", serif;
+    -fx-font-size: 36px;
     -fx-font-weight: bold;
-    -fx-text-fill: #c9a961;
+    -fx-text-fill: #a83a3a;
     -fx-padding: 0 0 12 0;
 }
 
 .login-field {
-    -fx-background-color: #1a1a1a;
-    -fx-text-fill: #e8e8e8;
-    -fx-prompt-text-fill: #5a5a5a;
-    -fx-border-color: #2a2a2a;
+    -fx-font-family: "SF Pro Text", "Helvetica Neue", "Apple SD Gothic Neo", sans-serif;
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #2a2620;
+    -fx-prompt-text-fill: #b0a89a;
+    -fx-border-color: #e5e1d6;
     -fx-border-width: 1;
-    -fx-padding: 8 12 8 12;
+    -fx-padding: 8 14 8 14;
     -fx-pref-width: 320;
-    -fx-pref-height: 36;
+    -fx-pref-height: 38;
     -fx-font-size: 14px;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
 }
 
 .login-field:focused {
-    -fx-border-color: #c9a961;
-    -fx-background-color: #1a1a1a;
+    -fx-border-color: #a83a3a;
+    -fx-background-color: #ffffff;
 }
 
 .login-error {
-    -fx-text-fill: #8b0000;
+    -fx-font-family: "SF Pro Text", "Helvetica Neue", "Apple SD Gothic Neo", sans-serif;
+    -fx-text-fill: #c4554d;
     -fx-font-size: 12px;
+    -fx-font-weight: 500;
     -fx-min-height: 18;
     -fx-pref-width: 320;
     -fx-alignment: center;
 }
 
 .login-btn {
+    -fx-font-family: "SF Pro Text", "Helvetica Neue", "Apple SD Gothic Neo", sans-serif;
     -fx-background-color: transparent;
-    -fx-text-fill: #c9a961;
-    -fx-border-color: #c9a961;
+    -fx-text-fill: #a83a3a;
+    -fx-border-color: #a83a3a;
     -fx-border-width: 1;
     -fx-pref-width: 320;
-    -fx-pref-height: 40;
+    -fx-pref-height: 42;
     -fx-font-size: 14px;
-    -fx-font-weight: bold;
+    -fx-font-weight: 700;
     -fx-cursor: hand;
-    -fx-background-radius: 0;
-    -fx-border-radius: 0;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
 }
 
 .login-btn:hover {
-    -fx-background-color: #c9a961;
-    -fx-text-fill: #0a0a0a;
+    -fx-background-color: #a83a3a;
+    -fx-text-fill: #faf8f4;
 }
 
 .login-link {
-    -fx-text-fill: #8a8a8a;
+    -fx-font-family: "SF Pro Text", "Helvetica Neue", "Apple SD Gothic Neo", sans-serif;
+    -fx-text-fill: #857d70;
     -fx-font-size: 12px;
+    -fx-font-weight: 500;
     -fx-border-color: transparent;
     -fx-background-color: transparent;
     -fx-cursor: hand;
-    -fx-padding: 2 4 2 4;
+    -fx-padding: 2 6 2 6;
+    -fx-background-radius: 6;
 }
 
 .login-link:hover {
-    -fx-text-fill: #c9a961;
+    -fx-text-fill: #a83a3a;
 }
 
 .login-link-sep {
-    -fx-text-fill: #5a5a5a;
+    -fx-font-family: "SF Pro Text", "Helvetica Neue", "Apple SD Gothic Neo", sans-serif;
+    -fx-text-fill: #c4bdab;
     -fx-font-size: 12px;
     -fx-padding: 0 4 0 4;
 }

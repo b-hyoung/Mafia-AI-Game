@@ -1,6 +1,7 @@
 package GUI;
 
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -10,6 +11,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -21,18 +26,43 @@ public class LoginScene {
         root.getStyleClass().add("login-root");
         root.setAlignment(Pos.CENTER);
 
-        // Logo (optional — skipped if image file is missing)
-        URL logoUrl = LoginScene.class.getResource("/images/logo.png");
-        if (logoUrl != null) {
-            ImageView logo = new ImageView(new Image(logoUrl.toExternalForm()));
+        // Logo — prefer mp4 (looping, muted) if present, fall back to PNG, skip if neither exists
+        URL videoUrl = LoginScene.class.getResource("/videos/logo.mp4");
+        URL imageUrl = LoginScene.class.getResource("/images/logo.png");
+        if (videoUrl != null) {
+            Media media = new Media(videoUrl.toExternalForm());
+            MediaPlayer player = new MediaPlayer(media);
+            player.setCycleCount(MediaPlayer.INDEFINITE);
+            player.setMute(true);
+            player.setAutoPlay(true);
+            MediaView view = new MediaView(player);
+            view.setFitWidth(120);
+            view.setFitHeight(120);
+            view.setPreserveRatio(true);
+            view.setClip(new Circle(60, 60, 60));
+            // Crop center square from the source so non-square videos fill the circle
+            player.setOnReady(() -> {
+                double mw = media.getWidth();
+                double mh = media.getHeight();
+                if (mw > 0 && mh > 0) {
+                    double size = Math.min(mw, mh);
+                    double x = (mw - size) / 2.0;
+                    double y = (mh - size) / 2.0;
+                    view.setViewport(new Rectangle2D(x, y, size, size));
+                }
+            });
+            root.getChildren().add(view);
+        } else if (imageUrl != null) {
+            ImageView logo = new ImageView(new Image(imageUrl.toExternalForm()));
             logo.setFitWidth(120);
             logo.setFitHeight(120);
             logo.setPreserveRatio(true);
+            logo.setClip(new Circle(60, 60, 60));
             root.getChildren().add(logo);
         }
 
         // Title
-        Label title = new Label("MAFIA  FOR  JAVA");
+        Label title = new Label("Mafia for Java");
         title.getStyleClass().add("login-title");
 
         // Input fields
