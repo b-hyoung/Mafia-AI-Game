@@ -1,0 +1,93 @@
+/* === Mafia for Java — Login Scene ===
+   JavaFX uses -fx- prefix on all CSS properties.
+   Color tokens:
+     bg          #0a0a0a
+     surface     #1a1a1a
+     text        #e8e8e8
+     text-muted  #8a8a8a
+     accent-gold #c9a961
+     accent-red  #8b0000
+*/
+
+.login-root {
+    -fx-background-color: #0a0a0a;
+    -fx-padding: 40 40 40 40;
+    -fx-alignment: center;
+    -fx-spacing: 16;
+}
+
+.login-title {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 42px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #c9a961;
+    -fx-padding: 0 0 12 0;
+}
+
+.login-field {
+    -fx-background-color: #1a1a1a;
+    -fx-text-fill: #e8e8e8;
+    -fx-prompt-text-fill: #5a5a5a;
+    -fx-border-color: #2a2a2a;
+    -fx-border-width: 1;
+    -fx-padding: 8 12 8 12;
+    -fx-pref-width: 320;
+    -fx-pref-height: 36;
+    -fx-font-size: 14px;
+}
+
+.login-field:focused {
+    -fx-border-color: #c9a961;
+    -fx-background-color: #1a1a1a;
+}
+
+.login-error {
+    -fx-text-fill: #8b0000;
+    -fx-font-size: 12px;
+    -fx-min-height: 18;
+    -fx-pref-width: 320;
+    -fx-alignment: center;
+}
+
+.login-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #c9a961;
+    -fx-border-color: #c9a961;
+    -fx-border-width: 1;
+    -fx-pref-width: 320;
+    -fx-pref-height: 40;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+}
+
+.login-btn:hover {
+    -fx-background-color: #c9a961;
+    -fx-text-fill: #0a0a0a;
+}
+
+.login-link {
+    -fx-text-fill: #8a8a8a;
+    -fx-font-size: 12px;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+    -fx-padding: 2 4 2 4;
+}
+
+.login-link:hover {
+    -fx-text-fill: #c9a961;
+}
+
+.login-link-sep {
+    -fx-text-fill: #5a5a5a;
+    -fx-font-size: 12px;
+    -fx-padding: 0 4 0 4;
+}
+
+.login-link-row {
+    -fx-alignment: center;
+    -fx-padding: 4 0 0 0;
+}
