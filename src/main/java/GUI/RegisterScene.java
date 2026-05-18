@@ -1,5 +1,6 @@
 package GUI;
 
+import GUI.components.Logo;
 import GUI.components.ResultBox;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -22,8 +23,8 @@ public class RegisterScene {
         root.setSpacing(12);
         root.setStyle("-fx-padding: 32 32 32 32;");
 
-        // Logo (shared helper)
-        Node logo = SceneLogo.create(120);
+        // Logo (shared component)
+        Node logo = Logo.create(120);
         if (logo != null) {
             root.getChildren().add(logo);
         }

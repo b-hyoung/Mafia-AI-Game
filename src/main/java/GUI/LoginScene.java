@@ -1,5 +1,6 @@
 package GUI;
 
+import GUI.components.Logo;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -18,8 +19,8 @@ public class LoginScene {
         root.getStyleClass().add("login-root");
         root.setAlignment(Pos.CENTER);
 
-        // Logo (delegated to SceneLogo helper — same instance shape used by RegisterScene)
-        Node logo = SceneLogo.create(120);
+        // Logo (delegated to Logo component — same shape used by RegisterScene)
+        Node logo = Logo.create(120);
         if (logo != null) {
             root.getChildren().add(logo);
         }

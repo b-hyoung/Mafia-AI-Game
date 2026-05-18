@@ -1,4 +1,4 @@
-package GUI;
+package GUI.components;
 
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
@@ -16,11 +16,11 @@ import java.net.URL;
  * /videos/logo.mp4가 있으면 무한 루프 + 음소거 + 중앙 정사각형 viewport + 원형 클립으로 재생.
  * 없으면 /images/logo.png를 같은 방식으로 표시. 둘 다 없으면 null 반환.
  */
-public class SceneLogo {
+public class Logo {
 
     public static Node create(double size) {
-        URL videoUrl = SceneLogo.class.getResource("/videos/logo.mp4");
-        URL imageUrl = SceneLogo.class.getResource("/images/logo.png");
+        URL videoUrl = Logo.class.getResource("/videos/logo.mp4");
+        URL imageUrl = Logo.class.getResource("/images/logo.png");
 
         if (videoUrl != null) {
             Media media = new Media(videoUrl.toExternalForm());
