@@ -31,6 +31,14 @@ public class SceneManager {
         stage.setScene(scene);
     }
 
+    public static void showRegister(){
+        Scene scene = new Scene(RegisterScene.create(stage));
+        scene.getStylesheets().add(
+            SceneManager.class.getResource("/css/login.css").toExternalForm()
+        );
+        stage.setScene(scene);
+    }
+
     public static void showLobby(){
         stage.setScene(new Scene(LobbyScene.create(stage)));
     }
