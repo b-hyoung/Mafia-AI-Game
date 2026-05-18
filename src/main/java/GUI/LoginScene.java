@@ -44,18 +44,40 @@ public class LoginScene {
         pw.getStyleClass().add("login-field");
         pw.setMaxWidth(320);
 
+        // Error label (hidden until validation fails)
+        Label errorLabel = new Label();
+        errorLabel.getStyleClass().add("login-error");
+        errorLabel.setVisible(false);
+
         // Login button
         Button loginBtn = new Button("LOGIN");
         loginBtn.getStyleClass().add("login-btn");
         loginBtn.setMaxWidth(320);
 
         loginBtn.setOnAction(e -> {
-            // TODO: DAO로 실제 로그인 검증
+            String idText = id.getText() == null ? "" : id.getText().trim();
+            String pwText = pw.getText() == null ? "" : pw.getText();
+
+            if (idText.isEmpty() || pwText.isEmpty()) {
+                errorLabel.setText("아이디와 비밀번호를 입력해주세요");
+                errorLabel.setVisible(true);
+                return;
+            }
+
+            // TODO: DAO로 실제 검증. 실패하면:
+            //   errorLabel.setText("아이디 또는 비밀번호가 일치하지 않습니다");
+            //   errorLabel.setVisible(true);
+            //   return;
+
             SceneManager.baseSize();
             SceneManager.showLobby();
         });
 
-        root.getChildren().addAll(title, id, pw, loginBtn);
+        // Hide error message as soon as the user starts editing either field
+        id.textProperty().addListener((obs, oldVal, newVal) -> errorLabel.setVisible(false));
+        pw.textProperty().addListener((obs, oldVal, newVal) -> errorLabel.setVisible(false));
+
+        root.getChildren().addAll(title, id, pw, errorLabel, loginBtn);
 
         return root;
     }
