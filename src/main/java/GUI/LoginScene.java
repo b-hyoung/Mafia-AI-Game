@@ -17,7 +17,8 @@ public class LoginScene {
 
         loginBtn.setOnAction(e -> {
             //로그인 성공 DAO 만들어서 넣기
-            stage.setScene(new Scene(LobbyScene.create(stage),1270,720));
+            SceneManager.baseSize();
+            SceneManager.showLobby();
         });
 
         root.getChildren().addAll(id,pw,loginBtn);

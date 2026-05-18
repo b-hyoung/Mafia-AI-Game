@@ -13,7 +13,7 @@ public class MainGame extends Application {
 
         SceneManager.init(stage);
         SceneManager.showLogin();
-        SceneManager.baseSize();
+        SceneManager.LoginSize();
 
         stage.setTitle("마피아 in AI");
         stage.show();

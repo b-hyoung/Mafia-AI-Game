@@ -12,6 +12,10 @@ public class SceneManager {
         stage.setMinWidth(1280);
         stage.setMinHeight(720);
     }
+    public static void LoginSize(){
+        stage.setMinWidth(510);
+        stage.setMinHeight(370);
+    }
     public static void showLogin(){
         stage.setScene(new Scene(LoginScene.create(stage)));
     }
