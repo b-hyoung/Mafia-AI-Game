@@ -2,11 +2,13 @@ package GUI;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -77,7 +79,27 @@ public class LoginScene {
         id.textProperty().addListener((obs, oldVal, newVal) -> errorLabel.setVisible(false));
         pw.textProperty().addListener((obs, oldVal, newVal) -> errorLabel.setVisible(false));
 
-        root.getChildren().addAll(title, id, pw, errorLabel, loginBtn);
+        // Sub-links (signup / find password) — UI only, no behavior yet
+        Hyperlink signupLink = new Hyperlink("회원가입");
+        signupLink.getStyleClass().add("login-link");
+        signupLink.setOnAction(e -> {
+            // TODO: 회원가입 화면 연결
+        });
+
+        Label sep = new Label("|");
+        sep.getStyleClass().add("login-link-sep");
+
+        Hyperlink findLink = new Hyperlink("비밀번호 찾기");
+        findLink.getStyleClass().add("login-link");
+        findLink.setOnAction(e -> {
+            // TODO: 비밀번호 찾기 흐름
+        });
+
+        HBox linkRow = new HBox(signupLink, sep, findLink);
+        linkRow.getStyleClass().add("login-link-row");
+        linkRow.setAlignment(Pos.CENTER);
+
+        root.getChildren().addAll(title, id, pw, errorLabel, loginBtn, linkRow);
 
         return root;
     }
