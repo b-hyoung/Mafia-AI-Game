@@ -45,15 +45,41 @@ public class RegisterScene {
         pwConfirm.getStyleClass().add("login-field");
         pwConfirm.setMaxWidth(320);
 
+        // Error label (hidden until validation fails)
+        Label errorLabel = new Label();
+        errorLabel.getStyleClass().add("login-error");
+        errorLabel.setVisible(false);
+
         // Register button
         Button registerBtn = new Button("가입하기");
         registerBtn.getStyleClass().add("login-btn");
         registerBtn.setMaxWidth(320);
         registerBtn.setOnAction(e -> {
-            // TODO: 검증 + DAO 등록 — Task 5에서 채움
+            String idText = id.getText() == null ? "" : id.getText().trim();
+            String pwText = pw.getText() == null ? "" : pw.getText();
+            String pwConfirmText = pwConfirm.getText() == null ? "" : pwConfirm.getText();
+
+            if (idText.isEmpty() || pwText.isEmpty() || pwConfirmText.isEmpty()) {
+                errorLabel.setText("모든 항목을 입력해주세요");
+                errorLabel.setVisible(true);
+                return;
+            }
+            if (!pwText.equals(pwConfirmText)) {
+                errorLabel.setText("비밀번호가 일치하지 않습니다");
+                errorLabel.setVisible(true);
+                return;
+            }
+
+            // TODO: UserDao.register(idText, pwText) — DAO 미구현
+            SceneManager.showLogin();
         });
 
-        root.getChildren().addAll(title, id, pw, pwConfirm, registerBtn);
+        // Hide error message when the user edits any field
+        id.textProperty().addListener((obs, oldVal, newVal) -> errorLabel.setVisible(false));
+        pw.textProperty().addListener((obs, oldVal, newVal) -> errorLabel.setVisible(false));
+        pwConfirm.textProperty().addListener((obs, oldVal, newVal) -> errorLabel.setVisible(false));
+
+        root.getChildren().addAll(title, id, pw, pwConfirm, errorLabel, registerBtn);
 
         return root;
     }
