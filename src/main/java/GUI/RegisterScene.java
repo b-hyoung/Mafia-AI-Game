@@ -1,5 +1,6 @@
 package GUI;
 
+import GUI.components.ResultBox;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -72,8 +73,23 @@ public class RegisterScene {
                 return;
             }
 
-            // TODO: UserDao.register(idText, pwText) — DAO 미구현
-            SceneManager.showLogin();
+            // TODO: 진짜 DAO 붙으면 아래 임시 분기를 UserDao.register(...) 호출로 교체
+            boolean ok = !"admin".equalsIgnoreCase(idText);
+            if (ok) {
+                ResultBox.showSuccess(
+                    stage,
+                    "회원가입 성공",
+                    "회원가입이 완료되었습니다",
+                    () -> SceneManager.showLogin()
+                );
+            } else {
+                ResultBox.showFail(
+                    stage,
+                    "회원가입 실패",
+                    "이미 사용 중인 아이디입니다",
+                    null
+                );
+            }
         });
 
         // Hide error message when the user edits any field
