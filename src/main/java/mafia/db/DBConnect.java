@@ -16,7 +16,7 @@ public class DBConnect {
 
     public static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
     public static final String URL =
-        "jdbc:mysql://localhost:3306/mafia_game?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Seoul";
+        "jdbc:mysql://localhost:3306/mafia?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Seoul";
     public static final String DB_ID = "root";
     public static final String DB_PWD = "1234"; // TODO: 본인 환경에 맞게 변경 (또는 properties/env로 분리)
     public static Connection conn=null;
@@ -43,12 +43,16 @@ public class DBConnect {
         }
         return conn;
     }
-    public static void close() throws Exception{
-        if(conn!=null) {
-            conn.close();
-            System.out.println("DB 연결 해제");
-        }else {
-            System.out.println("이미 해제 상태");
+    public static void close(){
+        try {
+            if (conn != null) {
+                conn.close();
+                System.out.println("DB 연결 해제");
+            } else {
+                System.out.println("이미 해제 상태");
+            }
+        }catch(Exception e) {
+            e.printStackTrace();
         }
     }
 }
