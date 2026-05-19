@@ -17,9 +17,9 @@ public class UserDAO {
 
     private UserDAO() {}
 
-    UserDAO instance = new UserDAO();
+    public static UserDAO instance = new UserDAO();
 
-    public UserDAO getInstance() {
+    public static UserDAO getInstance() {
         return instance;
     }
 
@@ -63,9 +63,7 @@ public class UserDAO {
 
     public boolean LoginUser(String nickname,String password) throws SQLException {
         String storedPassword = findPasswordHash(nickname);
-        if(storedPassword == null){
-            return false;
-        }
-        return BCrypt.checkpw(password,storedPassword);
+        if (storedPassword == null) return false;
+        return BCrypt.checkpw(password, storedPassword);
     }
 }

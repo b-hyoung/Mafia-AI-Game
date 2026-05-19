@@ -12,11 +12,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import mafia.db.UserDAO;
+
+import java.sql.SQLException;
 
 public class RegisterScene {
 
     public static VBox create(Stage stage) {
         VBox root = new VBox();
+        UserDAO instance = UserDAO.getInstance();
         root.getStyleClass().add("login-root");
         root.setAlignment(Pos.CENTER);
         // Tighter spacing/padding to fit one extra field in the same 520x600 window
@@ -75,7 +79,12 @@ public class RegisterScene {
             }
 
             // TODO: 진짜 DAO 붙으면 아래 임시 분기를 UserDao.register(...) 호출로 교체
-            boolean ok = !"admin".equalsIgnoreCase(idText);
+            boolean ok = false;
+            try {
+                ok = instance.RegisterUser(idText, pwText);
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
             if (ok) {
                 ResultBox.showSuccess(
                     stage,
