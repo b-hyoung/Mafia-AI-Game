@@ -2,10 +2,12 @@ package GUI;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import mafia.domain.Room;
 
 public class SceneManager {
 
     public static Stage stage;
+    public static String currentNickname; // 로그인 성공 시 LoginScene이 설정
 
     public static void init(Stage s){stage = s;}
 
@@ -40,6 +42,18 @@ public class SceneManager {
     }
 
     public static void showLobby(){
-        stage.setScene(new Scene(LobbyScene.create(stage)));
+        Scene scene = new Scene(LobbyScene.create(stage));
+        scene.getStylesheets().add(
+            SceneManager.class.getResource("/css/login.css").toExternalForm()
+        );
+        scene.getStylesheets().add(
+            SceneManager.class.getResource("/css/lobby.css").toExternalForm()
+        );
+        stage.setScene(scene);
+    }
+
+    public static void showWaitingRoom(Room room){
+        Scene scene = new Scene(WaitingRoomScene.create(room));
+        stage.setScene(scene);
     }
 }
