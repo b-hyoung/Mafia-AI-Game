@@ -1,6 +1,8 @@
 package GUI.components;
 
 import javafx.beans.binding.Bindings;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.WeakChangeListener;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -11,6 +13,7 @@ import mafia.domain.Room;
 import mafia.domain.RoomState;
 
 import java.net.URL;
+import java.util.Objects;
 
 /**
  * 단일 방 카드 컴포넌트.
@@ -29,6 +32,7 @@ public class RoomCard {
      * @param onDouble 더블클릭 시 호출 (대기 상태일 때만)
      */
     public static VBox create(Room room, Runnable onClick, Runnable onDouble) {
+        Objects.requireNonNull(room, "room");
         VBox card = new VBox();
         card.getStyleClass().add("room-card");
         card.setAlignment(Pos.CENTER);
@@ -66,17 +70,21 @@ public class RoomCard {
 
         card.getChildren().addAll(title, host, status);
 
-        // 상태에 따라 disabled 클래스 자동 토글
+        // 상태에 따라 disabled 클래스 자동 토글 (WeakChangeListener로 메모리 leak 방지)
         applyDisabledIfNeeded(card, room);
-        room.stateProperty().addListener((obs, oldVal, newVal) -> applyDisabledIfNeeded(card, room));
+        ChangeListener<RoomState> stateListener =
+            (obs, oldVal, newVal) -> applyDisabledIfNeeded(card, room);
+        // strong ref는 card 자신이 잡아둠 — card 살아있는 동안만 listener 살아있음
+        card.getProperties().put("roomStateListener", stateListener);
+        room.stateProperty().addListener(new WeakChangeListener<>(stateListener));
 
         // 클릭 핸들러 (대기 상태일 때만)
         card.setOnMouseClicked(e -> {
             if (room.getState() != RoomState.WAITING) return;
             if (e.getClickCount() == 2) {
-                onDouble.run();
+                if (onDouble != null) onDouble.run();
             } else {
-                onClick.run();
+                if (onClick != null) onClick.run();
             }
         });
 
