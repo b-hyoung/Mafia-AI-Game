@@ -1,0 +1,160 @@
+/* === Mafia for Java — Lobby Scene ===
+   login.css의 컬러 톤(크림 옵화이트 + 와인레드)을 그대로 따른다.
+*/
+
+.lobby-root {
+    -fx-background-color: #faf8f4;
+}
+
+.lobby-topbar {
+    -fx-padding: 14 24 14 24;
+    -fx-border-color: #e5e1d6;
+    -fx-border-width: 0 0 1 0;
+}
+
+.lobby-title {
+    -fx-font-family: "Copperplate", "Apple SD Gothic Neo", serif;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #a83a3a;
+}
+
+.lobby-welcome {
+    -fx-font-family: "Helvetica Neue", "Apple SD Gothic Neo", sans-serif;
+    -fx-font-size: 13px;
+    -fx-text-fill: #3b2a1a;
+}
+
+.lobby-action-bar {
+    -fx-padding: 12 24 12 24;
+    -fx-spacing: 12;
+    -fx-alignment: center-left;
+}
+
+.lobby-action-btn {
+    -fx-font-family: "Helvetica Neue", "Apple SD Gothic Neo", sans-serif;
+    -fx-background-color: transparent;
+    -fx-text-fill: #a83a3a;
+    -fx-border-color: #a83a3a;
+    -fx-border-width: 1;
+    -fx-padding: 6 16 6 16;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+}
+
+.lobby-action-btn:hover {
+    -fx-background-color: #a83a3a;
+    -fx-text-fill: #faf8f4;
+}
+
+.room-grid {
+    -fx-padding: 16;
+    -fx-hgap: 16;
+    -fx-vgap: 16;
+}
+
+.room-card {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e5e1d6;
+    -fx-border-width: 1;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-padding: 16;
+    -fx-spacing: 8;
+    -fx-alignment: center;
+    -fx-cursor: hand;
+}
+
+.room-card:hover {
+    -fx-border-color: #a83a3a;
+}
+
+.room-card-selected {
+    -fx-border-color: #a83a3a;
+    -fx-border-width: 2;
+    -fx-background-color: #faf2ec;
+}
+
+.room-card-disabled {
+    -fx-opacity: 0.5;
+    -fx-cursor: default;
+}
+
+.room-card-title {
+    -fx-font-family: "Copperplate", "Apple SD Gothic Neo", serif;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #a83a3a;
+}
+
+.room-card-host {
+    -fx-font-size: 12px;
+    -fx-text-fill: #857d70;
+}
+
+.room-card-status {
+    -fx-font-size: 12px;
+    -fx-text-fill: #3b2a1a;
+}
+
+.online-sidebar {
+    -fx-background-color: #f5f0e6;
+    -fx-border-color: #e5e1d6;
+    -fx-border-width: 0 0 0 1;
+    -fx-padding: 16;
+    -fx-spacing: 8;
+    -fx-pref-width: 250;
+}
+
+.online-sidebar-header {
+    -fx-font-family: "Copperplate", "Apple SD Gothic Neo", serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #3b2a1a;
+}
+
+.online-user-row {
+    -fx-font-size: 13px;
+    -fx-text-fill: #3b2a1a;
+    -fx-padding: 4 0 4 0;
+}
+
+.online-user-me {
+    -fx-text-fill: #a83a3a;
+    -fx-font-weight: bold;
+}
+
+.lobby-enter-btn {
+    -fx-font-family: "Helvetica Neue", "Apple SD Gothic Neo", sans-serif;
+    -fx-background-color: transparent;
+    -fx-text-fill: #a83a3a;
+    -fx-border-color: #a83a3a;
+    -fx-border-width: 1;
+    -fx-pref-width: 320;
+    -fx-pref-height: 42;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+}
+
+.lobby-enter-btn:hover {
+    -fx-background-color: #a83a3a;
+    -fx-text-fill: #faf8f4;
+}
+
+.lobby-enter-btn:disabled {
+    -fx-opacity: 0.4;
+    -fx-cursor: default;
+}
+
+.lobby-bottom-bar {
+    -fx-padding: 16 24 20 24;
+    -fx-alignment: center;
+    -fx-border-color: #e5e1d6;
+    -fx-border-width: 1 0 0 0;
+}
