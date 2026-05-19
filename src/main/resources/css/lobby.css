@@ -1,14 +1,14 @@
 /* === Mafia for Java — Lobby Scene ===
-   login.css의 컬러 톤(크림 옵화이트 + 와인레드)을 그대로 따른다.
+   색 변수는 tokens.css에서 정의. 여기선 변수 참조만 사용.
 */
 
 .lobby-root {
-    -fx-background-color: #faf8f4;
+    -fx-background-color: -color-bg-primary;
 }
 
 .lobby-topbar {
     -fx-padding: 14 24 14 24;
-    -fx-border-color: #e5e1d6;
+    -fx-border-color: -color-border;
     -fx-border-width: 0 0 1 0;
 }
 
@@ -16,13 +16,13 @@
     -fx-font-family: "Copperplate", "Apple SD Gothic Neo", serif;
     -fx-font-size: 20px;
     -fx-font-weight: bold;
-    -fx-text-fill: #a83a3a;
+    -fx-text-fill: -color-accent;
 }
 
 .lobby-welcome {
     -fx-font-family: "Helvetica Neue", "Apple SD Gothic Neo", sans-serif;
     -fx-font-size: 13px;
-    -fx-text-fill: #3b2a1a;
+    -fx-text-fill: -color-text-body;
 }
 
 .lobby-action-bar {
@@ -34,8 +34,8 @@
 .lobby-action-btn {
     -fx-font-family: "Helvetica Neue", "Apple SD Gothic Neo", sans-serif;
     -fx-background-color: transparent;
-    -fx-text-fill: #a83a3a;
-    -fx-border-color: #a83a3a;
+    -fx-text-fill: -color-accent;
+    -fx-border-color: -color-accent;
     -fx-border-width: 1;
     -fx-padding: 6 16 6 16;
     -fx-font-size: 13px;
@@ -46,8 +46,8 @@
 }
 
 .lobby-action-btn:hover {
-    -fx-background-color: #a83a3a;
-    -fx-text-fill: #faf8f4;
+    -fx-background-color: -color-accent;
+    -fx-text-fill: -color-bg-primary;
 }
 
 .room-grid {
@@ -57,8 +57,8 @@
 }
 
 .room-card {
-    -fx-background-color: #ffffff;
-    -fx-border-color: #e5e1d6;
+    -fx-background-color: -color-bg-surface;
+    -fx-border-color: -color-border;
     -fx-border-width: 1;
     -fx-background-radius: 12;
     -fx-border-radius: 12;
@@ -69,13 +69,13 @@
 }
 
 .room-card:hover {
-    -fx-border-color: #a83a3a;
+    -fx-border-color: -color-accent;
 }
 
 .room-card-selected {
-    -fx-border-color: #a83a3a;
+    -fx-border-color: -color-accent;
     -fx-border-width: 2;
-    -fx-background-color: #faf2ec;
+    -fx-background-color: -color-bg-elevated;
 }
 
 .room-card-disabled {
@@ -87,22 +87,22 @@
     -fx-font-family: "Copperplate", "Apple SD Gothic Neo", serif;
     -fx-font-size: 16px;
     -fx-font-weight: bold;
-    -fx-text-fill: #a83a3a;
+    -fx-text-fill: -color-accent;
 }
 
 .room-card-host {
     -fx-font-size: 12px;
-    -fx-text-fill: #857d70;
+    -fx-text-fill: -color-text-secondary;
 }
 
 .room-card-status {
     -fx-font-size: 12px;
-    -fx-text-fill: #3b2a1a;
+    -fx-text-fill: -color-text-body;
 }
 
 .online-sidebar {
-    -fx-background-color: #f5f0e6;
-    -fx-border-color: #e5e1d6;
+    -fx-background-color: -color-bg-secondary;
+    -fx-border-color: -color-border;
     -fx-border-width: 0 0 0 1;
     -fx-padding: 16;
     -fx-spacing: 8;
@@ -113,25 +113,25 @@
     -fx-font-family: "Copperplate", "Apple SD Gothic Neo", serif;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
-    -fx-text-fill: #3b2a1a;
+    -fx-text-fill: -color-text-body;
 }
 
 .online-user-row {
     -fx-font-size: 13px;
-    -fx-text-fill: #3b2a1a;
+    -fx-text-fill: -color-text-body;
     -fx-padding: 4 0 4 0;
 }
 
 .online-user-me {
-    -fx-text-fill: #a83a3a;
+    -fx-text-fill: -color-accent;
     -fx-font-weight: bold;
 }
 
 .lobby-enter-btn {
     -fx-font-family: "Helvetica Neue", "Apple SD Gothic Neo", sans-serif;
     -fx-background-color: transparent;
-    -fx-text-fill: #a83a3a;
-    -fx-border-color: #a83a3a;
+    -fx-text-fill: -color-accent;
+    -fx-border-color: -color-accent;
     -fx-border-width: 1;
     -fx-pref-width: 320;
     -fx-pref-height: 42;
@@ -143,8 +143,8 @@
 }
 
 .lobby-enter-btn:hover {
-    -fx-background-color: #a83a3a;
-    -fx-text-fill: #faf8f4;
+    -fx-background-color: -color-accent;
+    -fx-text-fill: -color-bg-primary;
 }
 
 .lobby-enter-btn:disabled {
@@ -155,14 +155,14 @@
 .lobby-bottom-bar {
     -fx-padding: 16 24 20 24;
     -fx-alignment: center;
-    -fx-border-color: #e5e1d6;
+    -fx-border-color: -color-border;
     -fx-border-width: 1 0 0 0;
 }
 
 /* === Plus card (방 만들기) === */
 .room-card-plus {
-    -fx-background-color: #faf8f4;
-    -fx-border-color: #c7bfae;
+    -fx-background-color: -color-bg-primary;
+    -fx-border-color: -color-border-dashed;
     -fx-border-style: dashed;
     -fx-border-width: 2;
     -fx-background-radius: 12;
@@ -174,25 +174,25 @@
 }
 
 .room-card-plus:hover {
-    -fx-border-color: #a83a3a;
+    -fx-border-color: -color-accent;
 }
 
 .room-card-plus-icon {
     -fx-font-family: "Helvetica Neue", "Apple SD Gothic Neo", sans-serif;
     -fx-font-size: 48px;
-    -fx-text-fill: #c7bfae;
+    -fx-text-fill: -color-border-dashed;
 }
 
 .room-card-plus:hover .room-card-plus-icon {
-    -fx-text-fill: #a83a3a;
+    -fx-text-fill: -color-accent;
 }
 
 .room-card-plus-label {
     -fx-font-family: "Helvetica Neue", "Apple SD Gothic Neo", sans-serif;
     -fx-font-size: 13px;
-    -fx-text-fill: #857d70;
+    -fx-text-fill: -color-text-secondary;
 }
 
 .room-card-plus:hover .room-card-plus-label {
-    -fx-text-fill: #a83a3a;
+    -fx-text-fill: -color-accent;
 }

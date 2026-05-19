@@ -25,8 +25,16 @@ public class SceneManager {
         stage.setHeight(600);
     }
 
+    /** Scene에 디자인 토큰(tokens.css)을 가장 먼저 적용한다. 다른 css의 -color-* 변수 참조의 전제. */
+    public static void applyTokens(Scene scene) {
+        scene.getStylesheets().add(
+            SceneManager.class.getResource("/css/tokens.css").toExternalForm()
+        );
+    }
+
     public static void showLogin(){
         Scene scene = new Scene(LoginScene.create(stage));
+        applyTokens(scene);
         scene.getStylesheets().add(
             SceneManager.class.getResource("/css/login.css").toExternalForm()
         );
@@ -35,6 +43,7 @@ public class SceneManager {
 
     public static void showRegister(){
         Scene scene = new Scene(RegisterScene.create(stage));
+        applyTokens(scene);
         scene.getStylesheets().add(
             SceneManager.class.getResource("/css/login.css").toExternalForm()
         );
@@ -43,6 +52,7 @@ public class SceneManager {
 
     public static void showLobby(){
         Scene scene = new Scene(LobbyScene.create(stage));
+        applyTokens(scene);
         scene.getStylesheets().add(
             SceneManager.class.getResource("/css/login.css").toExternalForm()
         );
@@ -54,6 +64,7 @@ public class SceneManager {
 
     public static void showWaitingRoom(Room room){
         Scene scene = new Scene(WaitingRoomScene.create(room));
+        applyTokens(scene);
         stage.setScene(scene);
     }
 }

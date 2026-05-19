@@ -1,0 +1,32 @@
+/* === Mafia for Java — Design Tokens ===
+   모든 색 변수를 한 곳에서 관리한다.
+   다른 css 파일은 hex 값 대신 이 변수들을 참조한다 (예: -fx-background-color: -color-bg-primary;).
+
+   색을 바꾸고 싶으면 이 파일만 수정하면 전체 화면에 일괄 반영된다.
+
+   JavaFX의 "looked-up colors" 기능을 사용 — .root 셀렉터에 정의된 색 변수는
+   Scene 안의 모든 자식 노드에서 참조 가능하다.
+*/
+
+.root {
+    /* === Backgrounds === */
+    -color-bg-primary:    #faf8f4;  /* 메인 배경 (크림 옵화이트) */
+    -color-bg-surface:    #ffffff;  /* 카드 / 입력창 배경 (순백) */
+    -color-bg-elevated:   #faf2ec;  /* 선택된 카드 배경 (살짝 진한 크림) */
+    -color-bg-secondary:  #f5f0e6;  /* 사이드바 배경 (베이지) */
+
+    /* === Borders === */
+    -color-border:         #e5e1d6;  /* 기본 보더 (옅은 따뜻 그레이) */
+    -color-border-dashed:  #c7bfae;  /* 점선 보더 (+ 카드) */
+
+    /* === Text === */
+    -color-text-primary:      #2a2620;  /* 메인 텍스트 (따뜻한 차콜) */
+    -color-text-body:         #3b2a1a;  /* 본문 / 카드 상태 (다크 브라운) */
+    -color-text-secondary:    #857d70;  /* 보조 텍스트, 링크 (그레이브라운) */
+    -color-text-placeholder:  #b0a89a;  /* 입력 placeholder (페이드) */
+    -color-text-divider:      #c4bdab;  /* 구분자 (베이지 그레이) */
+
+    /* === Accents === */
+    -color-accent:  #a83a3a;  /* 와인레드 (타이틀, 액센트, 버튼) */
+    -color-error:   #c4554d;  /* 에러 (부드러운 벽돌색) */
+}

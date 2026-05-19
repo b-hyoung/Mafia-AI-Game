@@ -74,6 +74,9 @@ public class CreateRoomDialog {
 
         Scene scene = new Scene(root, 360, 280);
         scene.getStylesheets().add(
+            CreateRoomDialog.class.getResource("/css/tokens.css").toExternalForm()
+        );
+        scene.getStylesheets().add(
             CreateRoomDialog.class.getResource("/css/result-box.css").toExternalForm()
         );
         scene.getStylesheets().add(

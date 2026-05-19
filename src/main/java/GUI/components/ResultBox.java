@@ -54,6 +54,9 @@ public class ResultBox {
 
         Scene scene = new Scene(root, 360, 180);
         scene.getStylesheets().add(
+            ResultBox.class.getResource("/css/tokens.css").toExternalForm()
+        );
+        scene.getStylesheets().add(
             ResultBox.class.getResource("/css/result-box.css").toExternalForm()
         );
 
