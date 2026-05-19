@@ -1,5 +1,6 @@
 package GUI;
 
+import GUI.components.CreateRoomDialog;
 import GUI.components.RoomCard;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -106,6 +107,9 @@ public class LobbyScene {
             roomGrid.getChildren().add(card);
         }
 
+        // + 카드 (방 만들기) — 항상 마지막
+        roomGrid.getChildren().add(createPlusCard(stage, rooms, nickname));
+
         ScrollPane scroll = new ScrollPane(roomGrid);
         scroll.setFitToWidth(true);
         scroll.setStyle("-fx-background-color: transparent; -fx-background: transparent;");
@@ -202,15 +206,43 @@ public class LobbyScene {
         return map.get(r.getRoomId());
     }
 
+    /** + 카드 (방 만들기) — 클릭하면 다이얼로그 열림. */
+    private static VBox createPlusCard(Stage stage,
+                                       ObservableList<Room> rooms,
+                                       String nickname) {
+        VBox plus = new VBox();
+        plus.getStyleClass().add("room-card-plus");
+        plus.setAlignment(Pos.CENTER);
+        plus.setPrefSize(180, 220);
+        plus.setMaxSize(180, 220);
+
+        Label icon = new Label("+");
+        icon.getStyleClass().add("room-card-plus-icon");
+
+        Label label = new Label("방 만들기");
+        label.getStyleClass().add("room-card-plus-label");
+
+        plus.getChildren().addAll(icon, label);
+
+        plus.setOnMouseClicked(e -> {
+            CreateRoomDialog.show(stage, (title, max) -> {
+                int nextId = rooms.stream()
+                                  .mapToInt(Room::getRoomId)
+                                  .max().orElse(0) + 1;
+                Room newRoom = new Room(nextId, title, nickname, 1, max, RoomState.WAITING);
+                rooms.add(newRoom);
+                SceneManager.showWaitingRoom(newRoom);
+            });
+        });
+
+        return plus;
+    }
+
     private static ObservableList<Room> createDummyRooms() {
         return FXCollections.observableArrayList(
             new Room(1, "고수만 들어와", "alice",   4, 6, RoomState.WAITING),
             new Room(2, "아무나 콜",     "bob",     2, 6, RoomState.WAITING),
-            new Room(3, "조용한 밤에",   "charlie", 6, 6, RoomState.IN_GAME),
-            new Room(4, "빠른판",        "dan",     3, 6, RoomState.WAITING),
-            new Room(5, "초보환영",      "eve",     1, 6, RoomState.WAITING),
-            new Room(6, "꿀잼각",        "frank",   5, 6, RoomState.WAITING),
-            new Room(7, "심야 대전",     "grace",   4, 6, RoomState.IN_GAME)
+            new Room(3, "조용한 밤에",   "charlie", 6, 6, RoomState.IN_GAME)
         );
     }
 }
