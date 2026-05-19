@@ -11,6 +11,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import mafia.db.UserDAO;
+import mafia.domain.User;
+
+import java.sql.SQLException;
 
 public class LoginScene {
 
@@ -18,6 +22,7 @@ public class LoginScene {
         VBox root = new VBox();
         root.getStyleClass().add("login-root");
         root.setAlignment(Pos.CENTER);
+        UserDAO instance = UserDAO.getInstance();
 
         // Logo (delegated to Logo component — same shape used by RegisterScene)
         Node logo = Logo.create(120);
@@ -59,12 +64,19 @@ public class LoginScene {
                 errorLabel.setVisible(true);
                 return;
             }
+            boolean ok = false;
 
-            // TODO: DAO로 실제 검증. 실패하면:
-            //   errorLabel.setText("아이디 또는 비밀번호가 일치하지 않습니다");
-            //   errorLabel.setVisible(true);
-            //   return;
-
+            try {
+                ok = instance.LoginUser(idText, pwText);
+            } catch (Exception ex) {
+               System.out.println(ex);
+            }
+            if (!ok) {
+                errorLabel.setText("아이디 또는 비밀번호가 일치하지 않습니다");
+                errorLabel.setVisible(true);
+                return;
+            }
+            SceneManager.currentNickname = idText;
             SceneManager.baseSize();
             SceneManager.showLobby();
         });
