@@ -162,9 +162,39 @@ Scene이 바뀌면 `poller.stop()` 필요. `stage.sceneProperty().addListener(..
 |---|---|
 | 카드 클릭 | 그 방 선택. 다른 카드의 선택 해제. 와인 보더 표시. "입장하기" 버튼 활성. |
 | 카드 더블클릭 | 즉시 입장 (대기 상태 방만, 진행중이면 무시) |
+| **+ 카드 클릭** | **`CreateRoomDialog` 모달 표시 (제목 + 최대인원 4/6/8 선택). 만들기 → 새 Room을 rooms에 추가 + 자동으로 그 방 WaitingRoom 진입.** |
 | ⚡ 빠른 입장 클릭 | `rooms` 중 `WAITING` + 인원 안 찬 방 무작위 선택 → 즉시 입장. 없으면 `ResultBox.showFail` "입장 가능한 방이 없습니다" |
 | 🔄 새로고침 클릭 | polling Timeline의 한 사이클을 즉시 트리거 (`poller.playFromStart()`) |
 | 입장하기 클릭 | 선택된 방 → `SceneManager.showWaitingRoom(room)`. 선택 없으면 비활성 (Button.setDisable). |
+
+### 6-1. CreateRoomDialog (방 만들기 다이얼로그)
+
+`GUI.components.CreateRoomDialog`. ResultBox와 같은 패턴(별도 모달 Stage, UNDECORATED, APPLICATION_MODAL). 구성:
+
+- 타이틀: "방 만들기"
+- 제목 입력 `TextField` (prompt "방 제목")
+- 최대 인원 `ChoiceBox<Integer>` (선택지: 4, 6, 8, 기본 6)
+- 만들기 / 취소 버튼
+
+API:
+```java
+public static void show(Window owner, java.util.function.BiConsumer<String, Integer> onCreate);
+```
+- `onCreate` 콜백은 (title, maxPlayers)를 받음
+- 취소/ESC → 콜백 호출 없이 닫힘
+- 빈 제목으로 만들기 시도 → 다이얼로그 안 인라인 에러 표시
+
+새 Room 기본값 (LobbyScene 측):
+- `roomId` = 기존 rooms의 max + 1 (또는 단순 sequence)
+- `hostNickname` = `SceneManager.currentNickname` ("guest" fallback)
+- `currentPlayers` = 1
+- `state` = WAITING
+
+만든 후 흐름: `rooms.add(newRoom)` → `SceneManager.showWaitingRoom(newRoom)`. LobbyScene이 Scene에서 detach → poller 자동 정리 (sceneProperty listener).
+
+### 6-2. + 카드 (방 만들기 카드)
+
+CSS 클래스 `.room-card-plus`. 일반 카드와 같은 크기(180×220), 점선 보더(회색→hover 시 와인), 가운데 큰 `+` 글자 + 작은 "방 만들기" 라벨. RoomCard 컴포넌트가 아니라 LobbyScene 안에서 직접 VBox로 만든다 (1개만 쓰이는 단순 시각 요소).
 
 ## 7. 입장 후: `WaitingRoomScene` 자리만 마련
 
