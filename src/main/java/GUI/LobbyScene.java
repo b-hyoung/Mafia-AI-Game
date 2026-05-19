@@ -153,7 +153,6 @@ public class LobbyScene {
 
         Random rng = new Random();
         quickJoin.setOnAction(e -> {
-            Room target = null;
             // WAITING + 인원 안 찬 방 중 임의 선택
             java.util.List<Room> candidates = new java.util.ArrayList<>();
             for (Room r : rooms) {
@@ -168,7 +167,7 @@ public class LobbyScene {
                     "입장 가능한 방이 없습니다", null);
                 return;
             }
-            target = candidates.get(rng.nextInt(candidates.size()));
+            Room target = candidates.get(rng.nextInt(candidates.size()));
             SceneManager.showWaitingRoom(target);
         });
 
@@ -187,6 +186,11 @@ public class LobbyScene {
         }));
         poller.setCycleCount(Timeline.INDEFINITE);
         poller.play();
+
+        // Scene 전환 시 자동 정리 (메모리 leak 방지)
+        root.sceneProperty().addListener((obs, oldScene, newScene) -> {
+            if (newScene == null) poller.stop();
+        });
 
         refresh.setOnAction(e -> poller.playFromStart());
 
