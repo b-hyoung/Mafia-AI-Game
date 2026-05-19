@@ -25,4 +25,16 @@
             <artifactId>jackson-databind</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>mafia.server.MafiaServer</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
