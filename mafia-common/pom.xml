@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.bhyoung</groupId>
+        <artifactId>mafia-ai-game</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>mafia-common</artifactId>
+    <packaging>jar</packaging>
+    <name>Mafia Common</name>
+    <description>클라이언트와 서버가 공유하는 도메인/메시지 모델</description>
+
+    <dependencies>
+        <!-- Room.java가 JavaFX Property를 사용하므로 임시로 javafx-base 의존
+             (장기적으로는 도메인을 순수 POJO로 정리 + UI 어댑터 분리) -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-base</artifactId>
+        </dependency>
+    </dependencies>
+</project>
