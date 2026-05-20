@@ -4,8 +4,12 @@
 
 ## 1. 프로젝트 개요
 
-- **목적**: TCP 소켓 통신, DB 연동, AI 에이전트(Function Calling) 구조를 학습하기 위한 멀티플레이어 마피아 게임
-- **기술 스택**: Java Swing, TCP Socket, MySQL, OpenAI API (Function Calling)
+- **목적**: TCP 소켓 통신, DB 연동, AI 에이전트(CSP + LLM) 구조를 학습하기 위한 멀티플레이어 마피아 게임
+- **기술 스택**:
+  - 클라이언트: JavaFX (구 Swing에서 교체)
+  - 서버: Java + TCP Socket
+  - DB: MySQL
+  - AI 서비스: Python 마이크로서비스 (CSP solver + LLM Function Calling)
 - **플레이어 수**: 5명
 - **개발 단계**:
   - 1단계: 사람 1명 + 봇 4명 (AI 에이전트 구현에 집중)
@@ -62,7 +66,36 @@
 
 ## 4. AI 에이전트 설계
 
-### 제공 함수 목록
+### 4.1 추론 알고리즘: CSP4SDG (Constraint Satisfaction Problem for Social Deduction Games)
+
+봇이 "누가 마피아인가?"를 추론할 때 **CSP 기반**으로 동작한다. LLM 단독(블랙박스)이 아닌 형식적 추론을 채택한 이유:
+
+- **결정적 (deterministic)**: 같은 입력 → 같은 결정. 디버깅 / 일관성 좋음
+- **계산 효율적**: constraint propagation으로 경우의 수 폭발 회피 (Monte Carlo류와 대조)
+- **해석 가능**: 어떤 제약이 어떤 가설을 배제했는지 추적 가능
+- **시각화 친화적**: 사용자 사이드바에 봇의 추론 과정 실시간 표시 가능
+- **API 비용 ↓**: 추론은 로컬 CSP solver, LLM은 자연어 입출력만 보조
+
+### 4.2 작동 원리
+
+| CSP 요소 | 마피아 게임 매핑 |
+|---|---|
+| 변수 | 각 플레이어 (P1, P2, ..., P5) |
+| 도메인 | 가능한 역할 집합 {마피아, 시민, 경찰, 의사, 정병} |
+| 제약 (constraint) | 발언/사건 (예: "P1이 P2를 의사로 지목했는데 P2가 밤에 살해됨 → P1의 의사 가설 모순") |
+
+라운드 진행에 따라 제약이 누적 → 각 변수의 도메인이 좁아짐 → 마피아 후보 식별.
+
+### 4.3 LLM의 역할 (보조)
+
+봇의 추론 자체는 CSP solver. LLM은 두 가지 보조 역할만:
+
+1. **자연어 발언 → 형식적 제약 변환** (입력): "저는 어제 P3을 봤어요" → `constraint(P1.role==경찰 && P3.role==마피아)` 같은 형식
+2. **결정 → 자연어 발언 생성** (출력): `vote(P3, reason="모순된 알리바이")` → "P3씨, 어제 발언과 오늘 발언이 모순됩니다. 의심스러워요."
+
+→ LLM API 호출이 게임 한 판당 수 회로 제한됨. 비용/속도 개선.
+
+### 4.4 제공 함수 (Function Calling 호환)
 
 | 함수 | 사용 시점 | 설명 |
 |------|-----------|------|
@@ -71,19 +104,60 @@
 | `킬지목(대상)` | 밤 (마피아만) | 죽일 대상 선택 |
 | `조사(대상)` | 밤 (경찰/정병) | 대상의 마피아 여부 확인 |
 
-### AI에게 매 턴 넘기는 정보 (프롬프트)
+### 4.5 봇 추론 시각화 (학습 + 재미)
 
-- 너의 역할 (정병에게는 "경찰"이라고 알려줌)
-- 생존자 목록
-- 지금까지의 채팅 로그
-- 현재 페이즈 (토론/투표/밤)
-- 사용 가능한 함수 목록
-- 이전 밤 행동 결과 (경찰/정병에게만)
+게임 UI 사이드바에 봇의 현재 CSP 상태를 실시간 표시:
 
-### API 구조
+```
+🤖 AI 봇의 추론
+─────────────────────
+P1  [의사] 80%  [시민] 20%
+P2  💀 (밤 1)
+P3  [마피아] 60%  [시민] 40%
+P4  [경찰] 90%
 
-- OpenAI API Function Calling 사용
-- `AgentInterface`로 추상화하여 나중에 Claude API 등으로 교체 가능
+최근 제거된 가설:
+✗ P3 = 의사 (의사 살해됨, 모순)
+✗ P1 = 경찰 (조사 결과 다름)
+
+다음 투표 후보: P3 (60%)
+```
+
+- 도메인 reduction 막대 그래프
+- 제거된 가설과 모순 이유
+- 다음 행동 후보 + 확률
+
+봇이 "왜 그 결정"하는지 사용자가 즉시 이해 → 학습 자료 + 게임 몰입 동시.
+
+### 4.6 단계적 도입 (Phase 계획)
+
+| Phase | 봇 구현 수준 |
+|---|---|
+| Phase 4 (게임 진행) | Rule-based 봇 (단순 if-then) — 게임 흐름 검증 |
+| Phase 5 (AI 첫 도입) | 순수 LLM 봇 — Werewolf Arena 패턴, 동작 빠른 확인 |
+| Phase 6 (정교화) | LLM + 단순 Bayesian 또는 CSP 도입 |
+| Phase 7 (CSP4SDG) | CSP + LLM 보조 통합 — 본 spec의 완성 형태 |
+| Phase 8 | 봇 강도 조절 + 시각화 패널 |
+
+### 4.7 AI 서비스 분리 (Python 마이크로서비스)
+
+CSP solver + LLM 호출은 **Python 마이크로서비스**로 분리:
+
+```
+[Java 게임 서버] ←HTTP/REST→ [Python AI 서비스]
+                                   ├─ CSP solver (python-constraint, or-tools)
+                                   └─ LLM 호출 (openai SDK)
+```
+
+이유: Python 생태계가 AI/LLM에 압도적. Java 게임 서버는 게임 진행에 집중.
+
+### 4.8 참고 자료
+
+- **CSP4SDG (2024)**: "Constraint and Information-Theory Based Role Identification in Social Deduction Games with LLM-Enhanced Inference" (arxiv 2511.06175)
+- **Optimal Strategy in Werewolf Game (2024)**: Bayesian equilibrium 분석 (arxiv 2408.17177)
+- **Learning to Discuss Strategically (NeurIPS 2024)**: One Night Ultimate Werewolf
+
+→ 우리 봇은 CSP4SDG 패턴을 따르되 단순화된 형태로 시작 → 단계적으로 정교화.
 
 ## 5. 네트워크 & 통신 설계
 
