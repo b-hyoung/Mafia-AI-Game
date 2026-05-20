@@ -16,6 +16,8 @@
         <module>mafia-common</module>
         <module>mafia-server</module>
         <module>mafia-client</module>
+        <module>mafia-engine</module>
+        <module>mafia-agent</module>
     </modules>
 
     <properties>
@@ -31,10 +33,20 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- Internal module -->
+            <!-- Internal modules -->
             <dependency>
                 <groupId>com.bhyoung</groupId>
                 <artifactId>mafia-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bhyoung</groupId>
+                <artifactId>mafia-engine</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bhyoung</groupId>
+                <artifactId>mafia-agent</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

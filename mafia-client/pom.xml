@@ -20,6 +20,14 @@
             <groupId>com.bhyoung</groupId>
             <artifactId>mafia-common</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.bhyoung</groupId>
+            <artifactId>mafia-engine</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.bhyoung</groupId>
+            <artifactId>mafia-agent</artifactId>
+        </dependency>
 
         <!-- JavaFX -->
         <dependency>

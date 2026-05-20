@@ -1,0 +1,174 @@
+/* === Mafia for Java — Simulation Scene ===
+   봇 5명 자동 시뮬레이션 관전 화면.
+   색 변수는 tokens.css 참조.
+*/
+
+.sim-root {
+    -fx-background-color: -color-bg-primary;
+}
+
+.sim-topbar {
+    -fx-padding: 12 24 12 24;
+    -fx-border-color: -color-border;
+    -fx-border-width: 0 0 1 0;
+    -fx-alignment: center-left;
+    -fx-spacing: 12;
+}
+
+.sim-title {
+    -fx-font-family: "Copperplate", "Apple SD Gothic Neo", serif;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-accent;
+}
+
+.sim-ctrl-btn {
+    -fx-font-family: "Helvetica Neue", "Apple SD Gothic Neo", sans-serif;
+    -fx-background-color: transparent;
+    -fx-text-fill: -color-accent;
+    -fx-border-color: -color-accent;
+    -fx-border-width: 1;
+    -fx-padding: 4 12 4 12;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+}
+
+.sim-ctrl-btn:hover {
+    -fx-background-color: -color-accent;
+    -fx-text-fill: -color-bg-primary;
+}
+
+.sim-ctrl-btn:disabled {
+    -fx-opacity: 0.4;
+    -fx-cursor: default;
+}
+
+.sim-status {
+    -fx-font-size: 13px;
+    -fx-text-fill: -color-text-body;
+}
+
+/* === Player Card === */
+.sim-card-row {
+    -fx-padding: 16 24 16 24;
+    -fx-spacing: 12;
+    -fx-alignment: center;
+}
+
+.player-card {
+    -fx-background-color: -color-bg-surface;
+    -fx-border-color: -color-border;
+    -fx-border-width: 1;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-padding: 12;
+    -fx-spacing: 6;
+    -fx-alignment: center;
+    -fx-pref-width: 140;
+    -fx-pref-height: 160;
+    -fx-cursor: hand;
+}
+
+.player-card:hover {
+    -fx-border-color: -color-accent;
+}
+
+.player-card-selected {
+    -fx-border-color: -color-accent;
+    -fx-border-width: 2;
+    -fx-background-color: -color-bg-elevated;
+}
+
+.player-card-dead {
+    -fx-opacity: 0.5;
+}
+
+.player-card-icon {
+    -fx-font-size: 32px;
+}
+
+.player-card-nick {
+    -fx-font-family: "Helvetica Neue", "Apple SD Gothic Neo", sans-serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-text-primary;
+}
+
+.player-card-bottype {
+    -fx-font-size: 10px;
+    -fx-text-fill: -color-text-secondary;
+}
+
+.player-card-role {
+    -fx-font-size: 12px;
+    -fx-text-fill: -color-accent;
+    -fx-font-weight: bold;
+}
+
+/* === Panels === */
+.sim-body {
+    -fx-padding: 0 24 16 24;
+    -fx-spacing: 16;
+}
+
+.sim-panel {
+    -fx-background-color: -color-bg-surface;
+    -fx-border-color: -color-border;
+    -fx-border-width: 1;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-padding: 12;
+    -fx-spacing: 6;
+}
+
+.sim-panel-header {
+    -fx-font-family: "Copperplate", "Apple SD Gothic Neo", serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-text-body;
+    -fx-padding: 0 0 4 0;
+}
+
+/* Event log */
+.event-row {
+    -fx-font-family: "Menlo", "Monaco", "Courier New", monospace;
+    -fx-font-size: 12px;
+    -fx-text-fill: -color-text-body;
+    -fx-padding: 2 0 2 0;
+}
+
+.event-row-speak     { -fx-text-fill: -color-text-body; }
+.event-row-vote      { -fx-text-fill: -color-text-secondary; }
+.event-row-executed  { -fx-text-fill: -color-accent; -fx-font-weight: bold; }
+.event-row-kill      { -fx-text-fill: -color-error; -fx-font-weight: bold; }
+.event-row-invest    { -fx-text-fill: -color-text-secondary; -fx-font-style: italic; }
+.event-row-phase     { -fx-text-fill: -color-text-secondary; -fx-font-weight: bold; }
+.event-row-game      { -fx-text-fill: -color-accent; -fx-font-weight: bold; }
+
+/* Stats */
+.stats-line {
+    -fx-font-size: 13px;
+    -fx-text-fill: -color-text-body;
+}
+
+.stats-line-accent {
+    -fx-font-size: 13px;
+    -fx-text-fill: -color-accent;
+    -fx-font-weight: bold;
+}
+
+/* Inference (CSP 봇 추론 패널, 미래 사용) */
+.inference-dom-row {
+    -fx-font-size: 12px;
+    -fx-text-fill: -color-text-body;
+    -fx-padding: 2 0 2 0;
+}
+
+.inference-empty {
+    -fx-font-size: 12px;
+    -fx-text-fill: -color-text-secondary;
+    -fx-font-style: italic;
+}

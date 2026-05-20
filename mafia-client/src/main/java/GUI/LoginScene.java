@@ -78,7 +78,7 @@ public class LoginScene {
             }
             SceneManager.currentNickname = idText;
             SceneManager.baseSize();
-            SceneManager.showLobby();
+            SceneManager.showSimulation();
         });
 
         // Hide error message as soon as the user starts editing either field

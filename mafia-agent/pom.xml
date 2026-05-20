@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.bhyoung</groupId>
+        <artifactId>mafia-ai-game</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>mafia-agent</artifactId>
+    <packaging>jar</packaging>
+    <name>Mafia Agent</name>
+    <description>봇 Agent 인터페이스 + 구현체 (Random/RuleBased/CSP/LLM)</description>
+    <dependencies>
+        <dependency>
+            <groupId>com.bhyoung</groupId>
+            <artifactId>mafia-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.bhyoung</groupId>
+            <artifactId>mafia-engine</artifactId>
+        </dependency>
+    </dependencies>
+</project>

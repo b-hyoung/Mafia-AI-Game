@@ -67,4 +67,17 @@ public class SceneManager {
         applyTokens(scene);
         stage.setScene(scene);
     }
+
+    /**
+     * 봇 5명 시뮬레이션 관전 화면.
+     * 로그인 후 곧장 진입 (정식 게임 시작/방 만들기 흐름은 추후 작업).
+     */
+    public static void showSimulation(){
+        Scene scene = new Scene(GUI.sim.SimulationScene.create(stage));
+        applyTokens(scene);
+        scene.getStylesheets().add(
+            SceneManager.class.getResource("/css/simulation.css").toExternalForm()
+        );
+        stage.setScene(scene);
+    }
 }
