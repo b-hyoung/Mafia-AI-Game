@@ -432,32 +432,36 @@ section:has(.flow-big) .s-h {
 /* ═══════════════════════════════════════════════════════════
    Slide 7 — Techs
    ═══════════════════════════════════════════════════════════ */
+/* Tech-stack slide is dense (6 cards); shrink section + cards */
+section:has(.techs) { padding: var(--s-4) var(--s-7); }
+section:has(.techs) .s-h { font-size: 2rem; margin-bottom: var(--s-3); }
+
 .techs {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--s-3);
-  margin-top: var(--s-5);
+  gap: var(--s-2);
+  margin-top: var(--s-3);
 }
 .tech {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-left: 4px solid var(--accent);
   border-radius: var(--r-m);
-  padding: var(--s-4);
+  padding: var(--s-3);
 }
 .tech-name {
   display: block;
   font-family: var(--ff-sans);
-  font-size: var(--t-h3);
+  font-size: 1.5rem;
   font-weight: var(--w-b);
   letter-spacing: -0.02em;
-  margin-bottom: var(--s-2);
+  margin-bottom: var(--s-1);
 }
 .tech p {
   margin: 0;
-  font-size: var(--t-body);
+  font-size: 0.9375rem;
   color: var(--text-secondary);
-  line-height: 1.5;
+  line-height: 1.45;
 }
 
 /* ═══════════════════════════════════════════════════════════
