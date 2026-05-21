@@ -615,32 +615,44 @@
         </div>
       </section>
 
-      <!-- 11 · 로드맵 ────────────────────────────── -->
-      <section class="s-plain">
-        <p class="s-no">14 · 일정</p>
-        <h2 class="s-h" data-anim="fadeup">이렇게 만들어 갑니다</h2>
-        <div class="rm-list">
-          <div class="rm done" data-anim="cardin">
-            <span class="rm-when">Phase 1</span>
-            <span class="rm-st">✓ 완료</span>
-            <p>로그인 · 로비 · 멀티모듈 빌드 · 채팅 서버 · 더미 시뮬</p>
-          </div>
-          <div class="rm now" data-anim="cardin">
-            <span class="rm-when">Phase 1.5</span>
-            <span class="rm-st">진행 중</span>
-            <p>3진영 룰 · 클레임 발언 시스템 · 게임 엔진 · <b>사람·AI 혼합 매칭</b></p>
-          </div>
-          <div class="rm next" data-anim="cardin">
-            <span class="rm-when">Phase 2</span>
-            <span class="rm-st">예정</span>
-            <p>CSP 또는 Bayesian 추리 AI · <b>사람 vs AI 대전 모드</b> · 통계</p>
-          </div>
-          <div class="rm later" data-anim="cardin">
-            <span class="rm-when">Phase 3</span>
-            <span class="rm-st">미래</span>
-            <p>LLM 자유 발언 AI · <b>사람과 자연어 대화 가능</b></p>
-          </div>
+      <!-- 14 · References (참고 논문) ───────────────── -->
+      <section class="s-plain s-refs">
+        <p class="s-no">14 · 참고 논문</p>
+        <h2 class="s-h" data-anim="fadeup">
+          이 발표에 인용된 <span class="hi">3개 논문</span>
+        </h2>
+        <div class="refs-grid">
+
+          <!-- Monte Carlo / AlphaGo -->
+          <a class="ref-card mcts" href="https://www.nature.com/articles/nature16961" target="_blank" rel="noopener" data-anim="cardin">
+            <span class="ref-tag">Monte Carlo</span>
+            <h4 class="ref-title">Mastering the game of Go with deep neural networks and tree search</h4>
+            <p class="ref-meta">Silver, Huang, Maddison et al. · <b>DeepMind</b> · Nature, 2016</p>
+            <p class="ref-note">알파고가 바둑에 사용한 <b>MCTS + 신경망</b> 알고리즘 논문</p>
+            <span class="ref-link">nature.com/articles/nature16961 ↗</span>
+          </a>
+
+          <!-- CSP4SDG -->
+          <a class="ref-card csp" href="https://arxiv.org/abs/2511.06175" target="_blank" rel="noopener" data-anim="cardin">
+            <span class="ref-tag">CSP · 후보 A</span>
+            <h4 class="ref-title">CSP4SDG · Constraint and Information-Theory Based Role Identification in Social Deduction Games with LLM-Enhanced Inference</h4>
+            <p class="ref-meta"><b>McGill · Queen Mary University of London</b> · arXiv, 2025.11</p>
+            <p class="ref-note">4가지 제약(사실·룰·발언·가설)으로 게임 정보를 분해해 추론</p>
+            <span class="ref-link">arxiv.org/abs/2511.06175 ↗</span>
+          </a>
+
+          <!-- GRAIL -->
+          <a class="ref-card bay" href="https://arxiv.org/abs/2506.17788" target="_blank" rel="noopener" data-anim="cardin">
+            <span class="ref-tag">Bayesian · 후보 B</span>
+            <h4 class="ref-title">GRAIL · Bayesian Social Deduction with Graph-Informed Language Models</h4>
+            <p class="ref-meta">Rahimirad, Gergerli, Romero, Qian, Olson, Stepputtis, Campbell · <b>Purdue CAMP Lab</b> · arXiv, 2025.06</p>
+            <p class="ref-note">Factor graph + Belief propagation. 6인 Avalon 사람 대결 67% 승률</p>
+            <span class="ref-link">arxiv.org/abs/2506.17788 ↗</span>
+          </a>
         </div>
+        <p class="refs-note" data-anim="fadeup">
+          모든 링크는 카드 클릭 시 새 탭으로 열립니다.
+        </p>
       </section>
 
       <!-- 12 · End ────────────────────────────── -->
