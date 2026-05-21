@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>AI Mafia — 발표 자료</title>
+
+  <!-- Pretendard (Korean + Latin) -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+
+  <!-- Fraunces (serif accent) + JetBrains Mono (mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Fraunces:opsz,wght@9..144,500;9..144,700&display=swap" rel="stylesheet">
+
+  <!-- Reveal.js -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+  <!-- Three.js background canvas (dim, ambient) -->
+  <canvas id="bg-canvas"></canvas>
+  <div class="bg-overlay"></div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- 1 · Title ────────────────────────────── -->
+      <section class="s-title">
+        <div class="t-wrap">
+          <p class="t-eyebrow" data-anim="fadeup">졸업작품 · 2026</p>
+          <h1 class="t-hero" data-anim="fadeup-delay">
+            사람보다 교활한<br>
+            <span class="t-italic">AI</span>와 마피아 한 판
+          </h1>
+          <p class="t-tag" data-anim="fadeup-late">
+            사람 1~5명 + AI가 빈 자리를 메워 항상 6명. 누가 사람일지 AI일지 모른다.
+          </p>
+        </div>
+      </section>
+
+      <!-- 2 · What ────────────────────────────── -->
+      <section class="s-plain">
+        <p class="s-no">01 · 이게 뭐예요</p>
+        <h2 class="s-h" data-anim="fadeup">
+          사람과 AI가 <span class="hi">섞여서</span> 하는 마피아
+        </h2>
+        <p class="s-lead" data-anim="fadeup-delay">
+          사람이 1명만 모여도, 5명이 모여도 게임 시작.<br>
+          빈자리는 AI가 채운다. 옆 사람이 사람인지 AI인지조차 모른다.
+        </p>
+        <div class="big-stats" data-anim="cardin">
+          <div class="bs"><span class="bs-n">6</span><span class="bs-l">항상 6명 게임</span></div>
+          <div class="bs"><span class="bs-n" data-target="5">5</span><span class="bs-l">사람 최대</span></div>
+          <div class="bs"><span class="bs-n" data-target="3">3</span><span class="bs-l">진영</span></div>
+        </div>
+      </section>
+
+      <!-- 3 · Why ────────────────────────────── -->
+      <section class="s-plain">
+        <p class="s-no">02 · 왜 만들어요</p>
+        <h2 class="s-h" data-anim="fadeup">
+          <span class="hi">AI가 사람보다 교활할 수 있을까?</span>
+        </h2>
+        <div class="why-list">
+          <div class="why-li" data-anim="cardin">
+            <span class="why-bullet">①</span>
+            <p>AI 마피아는 사람을 속이고 처형 유도할 수 있을까?</p>
+          </div>
+          <div class="why-li" data-anim="cardin">
+            <span class="why-bullet">②</span>
+            <p>사람은 6명 중 누가 사람이고 누가 AI인지 구분할 수 있을까?</p>
+          </div>
+          <div class="why-li" data-anim="cardin">
+            <span class="why-bullet">③</span>
+            <p>친구 없이 혼자여도 AI가 5명 같이 놀아준다 — 마피아를 언제든 할 수 있게</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4 · 등장인물 ────────────────────────────── -->
+      <section class="s-plain">
+        <p class="s-no">03 · 등장인물</p>
+        <h2 class="s-h" data-anim="fadeup">6명, 3진영</h2>
+        <div class="cast">
+          <div class="cast-card mafia" data-anim="cardin">
+            <span class="cast-icon">🔴</span>
+            <h4>마피아 <small>×2</small></h4>
+            <p>밤마다 1명을 죽인다.<br>서로의 정체를 안다.</p>
+          </div>
+          <div class="cast-card citizen" data-anim="cardin">
+            <span class="cast-icon">🔵</span>
+            <h4>시민 <small>×1</small></h4>
+            <p>아무 능력 없음.<br>토론·투표만으로 마피아를 찾는다.</p>
+          </div>
+          <div class="cast-card police" data-anim="cardin">
+            <span class="cast-icon">🔍</span>
+            <h4>경찰 <small>×1</small></h4>
+            <p>밤마다 1명의 정체를 확인한다.</p>
+          </div>
+          <div class="cast-card doctor" data-anim="cardin">
+            <span class="cast-icon">🛡</span>
+            <h4>의사 <small>×1</small></h4>
+            <p>밤마다 1명을 보호한다.<br>자기 자신도 가능.</p>
+          </div>
+          <div class="cast-card psycho" data-anim="cardin">
+            <span class="cast-icon">🟣</span>
+            <h4>PSYCHO <small>×1</small></h4>
+            <p>중립. 마피아도 적, 시민도 적.<br>혼자 살아남으면 승.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5 · 게임 흐름 ────────────────────────────── -->
+      <section class="s-plain">
+        <p class="s-no">04 · 게임 흐름</p>
+        <h2 class="s-h" data-anim="fadeup">하루는 이렇게 돈다</h2>
+        <div class="flow-big">
+          <div class="fb" data-anim="flowstep">
+            <span class="fb-n">1</span>
+            <span class="fb-icon">🌙</span>
+            <h4>밤</h4>
+            <p>마피아 1명 죽임<br>경찰 조사 · 의사 보호</p>
+          </div>
+          <div class="fb-arr">→</div>
+          <div class="fb" data-anim="flowstep">
+            <span class="fb-n">2</span>
+            <span class="fb-icon">🗣️</span>
+            <h4>토론</h4>
+            <p>"내가 경찰이야"<br>"쟤 마피아 같아"</p>
+          </div>
+          <div class="fb-arr">→</div>
+          <div class="fb" data-anim="flowstep">
+            <span class="fb-n">3</span>
+            <span class="fb-icon">🗳️</span>
+            <h4>투표</h4>
+            <p>다수결로 1명 처형<br>동점이면 패스</p>
+          </div>
+          <div class="fb-arr">→</div>
+          <div class="fb" data-anim="flowstep">
+            <span class="fb-n">4</span>
+            <span class="fb-icon">⚖️</span>
+            <h4>판정</h4>
+            <p>승부 났으면 종료<br>아니면 다시 밤</p>
+          </div>
+        </div>
+        <p class="lead-note" data-anim="fadeup">이게 6명 다 죽거나, 진영이 정리될 때까지 반복.</p>
+      </section>
+
+      <!-- 6 · 시스템 구조 ────────────────────────────── -->
+      <section class="s-plain">
+        <p class="s-no">05 · 시스템 구조</p>
+        <h2 class="s-h" data-anim="fadeup">5개 부품으로 나눠 만든다</h2>
+        <div class="parts">
+          <div class="part" data-anim="cardin">
+            <span class="part-tag">UI</span>
+            <h4>화면</h4>
+            <p>사람이 게임하는 창<br>(채팅·투표 등 입력)</p>
+          </div>
+          <div class="part" data-anim="cardin">
+            <span class="part-tag">SERVER</span>
+            <h4>서버</h4>
+            <p>접속·채팅 중계</p>
+          </div>
+          <div class="part" data-anim="cardin">
+            <span class="part-tag">ENGINE</span>
+            <h4>게임 룰</h4>
+            <p>밤·투표·승리 판정</p>
+          </div>
+          <div class="part" data-anim="cardin">
+            <span class="part-tag">AGENT</span>
+            <h4>AI 두뇌</h4>
+            <p>누구를 의심할지 결정</p>
+          </div>
+          <div class="part" data-anim="cardin">
+            <span class="part-tag">DB</span>
+            <h4>저장소</h4>
+            <p>유저·전적 기록</p>
+          </div>
+        </div>
+        <p class="lead-note" data-anim="fadeup">하나가 망가져도 나머지는 살아있게 — <span class="hi-soft">멀티 모듈 구조</span>.</p>
+      </section>
+
+      <!-- 7 · 기술 스택 ────────────────────────────── -->
+      <section class="s-plain">
+        <p class="s-no">06 · 사용 기술</p>
+        <h2 class="s-h" data-anim="fadeup">검증된 기술만 골라 썼다</h2>
+        <div class="techs">
+          <div class="tech" data-anim="cardin">
+            <span class="tech-name">Java 21</span>
+            <p>안드로이드 앱도 만드는 그 언어.<br>최신 LTS 버전 사용.</p>
+          </div>
+          <div class="tech" data-anim="cardin">
+            <span class="tech-name">JavaFX</span>
+            <p>창·버튼·애니메이션을 그리는 UI 도구.<br>데스크탑 앱 전용.</p>
+          </div>
+          <div class="tech" data-anim="cardin">
+            <span class="tech-name">Maven</span>
+            <p>여러 모듈을 한꺼번에 빌드.<br>의존성·버전 관리.</p>
+          </div>
+          <div class="tech" data-anim="cardin">
+            <span class="tech-name">MySQL</span>
+            <p>유저 계정·전적 저장.<br>비밀번호는 BCrypt 암호화.</p>
+          </div>
+          <div class="tech" data-anim="cardin">
+            <span class="tech-name">TCP Socket</span>
+            <p>여러 사람이 동시 접속해도<br>실시간 채팅이 가능하게.</p>
+          </div>
+          <div class="tech" data-anim="cardin">
+            <span class="tech-name">CSP4SDG</span>
+            <p>AI가 누가 마피아인지<br>추리하는 알고리즘.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8 · AI 추리 ────────────────────────────── -->
+      <section class="s-plain">
+        <p class="s-no">07 · AI 추리</p>
+        <h2 class="s-h" data-anim="fadeup">AI는 이렇게 의심한다</h2>
+        <div class="reason">
+          <div class="reason-step" data-anim="cardin">
+            <h5>처음엔</h5>
+            <p>모두 똑같이 의심됨. <span class="hi-soft">"5가지 역할 다 가능"</span></p>
+          </div>
+          <div class="reason-arr">↓</div>
+          <div class="reason-step" data-anim="cardin">
+            <h5>P3가 밤에 죽음 → 시민이었음</h5>
+            <p>"P3는 마피아 아님" 사실 1개 추가.<br>다른 5명에 대한 의심도 함께 줄어듦.</p>
+          </div>
+          <div class="reason-arr">↓</div>
+          <div class="reason-step" data-anim="cardin">
+            <h5>경찰이 "P1 = 마피아" 라고 발표</h5>
+            <p>경찰이 진짜면 P1 처형이 답.<br>경찰이 거짓이면 그 사람(가짜 경찰)이 마피아.</p>
+          </div>
+          <div class="reason-arr">↓</div>
+          <div class="reason-step final" data-anim="cardin">
+            <h5>그렇게 단서가 모이면</h5>
+            <p><span class="hi">정체가 좁혀진다 → 투표 결정</span></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 9 · 알고리즘 비교 (둘로 좁힘) ────────── -->
+      <section class="s-plain">
+        <p class="s-no">08 · AI 알고리즘 선택</p>
+        <h2 class="s-h" data-anim="fadeup">
+          3개 중 <span class="hi">2개로 좁혔다</span>
+        </h2>
+        <div class="compare">
+          <div class="cmp finalist" data-anim="cardin">
+            <span class="cmp-tag finalist-tag">★ 후보 A</span>
+            <h4>CSP</h4>
+            <p class="cmp-fame">↳ 스도쿠를 푸는 그 방식</p>
+            <p class="cmp-desc">"불가능한 경우의 수"를 하나씩 지워간다</p>
+            <ul class="cmp-list">
+              <li class="ok">디버깅 쉬움 (같은 입력 → 같은 결과)</li>
+              <li class="ok">왜 그런 판단을 했는지 설명 가능</li>
+              <li class="ok">사전 학습 데이터 필요 없음</li>
+              <li class="ok">구현 단순 — 졸업작품에 현실적</li>
+            </ul>
+          </div>
+          <div class="cmp finalist" data-anim="cardin">
+            <span class="cmp-tag finalist-tag">★ 후보 B</span>
+            <h4>Bayesian</h4>
+            <p class="cmp-fame">↳ 스팸 필터의 확률 계산법</p>
+            <p class="cmp-desc">"이 사람이 마피아일 확률 73%" 같은 확률 분포</p>
+            <ul class="cmp-list">
+              <li class="ok">의심도를 확률로 표현 — 시각화 풍부</li>
+              <li class="ok">거짓말 모델링이 자연스러움</li>
+              <li class="ok">LLM과 통합 깔끔 (Phase 3 친화적)</li>
+              <li class="no">factor graph + BP 직접 구현 부담</li>
+            </ul>
+          </div>
+          <div class="cmp dropped" data-anim="cardin">
+            <span class="cmp-tag dropped-tag">✕ 탈락</span>
+            <h4>Monte Carlo</h4>
+            <p class="cmp-fame">↳ 알파고가 바둑에 쓴 알고리즘</p>
+            <p class="cmp-desc">"수천 번 시뮬레이션" 돌려서 평균 좋은 수 선택</p>
+            <ul class="cmp-list">
+              <li class="no">설명 가능성 약함</li>
+              <li class="no">같은 상황도 결과가 달라짐</li>
+              <li class="no"><b>정보 비공개 게임엔 부적합</b></li>
+            </ul>
+          </div>
+        </div>
+        <p class="cmp-note" data-anim="fadeup">
+          → 각 방향마다 <span class="hi-soft">2025년 최신 SOTA 논문</span>이 존재. 다음 슬라이드에서 비교.
+        </p>
+      </section>
+
+      <!-- 10 · CSP4SDG 풀 슬라이드 ────────────────── -->
+      <section class="s-plain s-paper-full">
+        <p class="s-no">09 · 후보 A 논문</p>
+        <h2 class="s-h" data-anim="fadeup">
+          <span class="pf-acronym">CSP4SDG</span> · 탐정의 <span class="hi">메모장</span> 방식
+        </h2>
+
+        <div class="pf-grid">
+          <div class="pf-side analogy" data-anim="cardin">
+            <h5 class="pf-head">🔍 한마디로</h5>
+            <p class="pf-big">"불가능한 답을 <b>하나씩 지워</b> 나간다"</p>
+            <p class="pf-detail">
+              <b>스도쿠를 푸는 방식과 같다.</b> 각 칸에 가능한 후보를 다 적어두고,
+              새 단서가 들어올 때마다 안 되는 것부터 지운다. 결국 하나만 남으면 정답.
+            </p>
+
+            <div class="pf-example">
+              <h6>우리 마피아 게임에 적용하면</h6>
+              <ol class="pf-steps">
+                <li>각 사람의 "5가지 역할 후보"를 다 적어둔다</li>
+                <li><b>P3 사망 + 시민 확정</b> → P3 후보에서 마피아·경찰·의사·PSYCHO 제거</li>
+                <li><b>P1이 "내가 경찰" 발표</b> → 진실이면 P1은 경찰, 거짓이면 P1이 마피아 가능성 ↑</li>
+                <li>단서 누적 → <b>가능한 조합이 점점 좁아짐</b></li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="pf-side mechanism" data-anim="cardin">
+            <h5 class="pf-head">📐 논문의 핵심 메커니즘</h5>
+            <p class="pf-mech-intro">게임 정보를 <b>4가지 제약 클래스</b>로 나눠서 처리:</p>
+            <div class="pf-mech">
+              <div class="pf-mech-row">
+                <span class="pf-tag c1">Evidence</span>
+                <p><b>확인된 사실</b> (예: P3 사망 = 시민이었음)</p>
+              </div>
+              <div class="pf-mech-row">
+                <span class="pf-tag c2">Phenomena</span>
+                <p><b>룰에서 자동 추론</b> (밤에 1명 죽음 = 마피아·PSYCHO 행동)</p>
+              </div>
+              <div class="pf-mech-row">
+                <span class="pf-tag c3">Assertions</span>
+                <p><b>플레이어 발언</b> (진실/거짓 모두 가능 — 가중치 처리)</p>
+              </div>
+              <div class="pf-mech-row">
+                <span class="pf-tag c4">Hypotheses</span>
+                <p><b>검증 대상 가설</b> (정보이득 가중치로 우선순위)</p>
+              </div>
+            </div>
+            <p class="pf-note">
+              <b>두 단계 처리</b> — ① Hard 제약으로 불가능 후보 제거(이분법) → ② Soft 제약으로 남은 후보에 점수.
+              순수 CSP의 이분법 + 가중치를 결합한 <b>probabilistic CSP</b>.
+            </p>
+          </div>
+        </div>
+
+        <div class="pf-result" data-anim="fadeup">
+          <span class="pf-result-tag">📊 논문 검증 결과</span>
+          <p>
+            Avalon · Mafia · Werewolf <b>3개 공개 데이터셋에서 모든 LLM 기준 모델을 능가</b>.
+            LLM에 보조 추론 도구로 붙이면 LLM 자체 성능도 향상.
+          </p>
+        </div>
+
+        <p class="pf-meta">arXiv 2511.06175 · 2025.11 · McGill · Queen Mary University of London</p>
+      </section>
+
+      <!-- 11 · GRAIL 풀 슬라이드 ────────────────── -->
+      <section class="s-plain s-paper-full">
+        <p class="s-no">10 · 후보 B 논문</p>
+        <h2 class="s-h" data-anim="fadeup">
+          <span class="pf-acronym bay">GRAIL</span> · 의심 <span class="hi">점수판</span> 방식
+        </h2>
+
+        <div class="pf-grid">
+          <div class="pf-side analogy" data-anim="cardin">
+            <h5 class="pf-head">🎯 한마디로</h5>
+            <p class="pf-big">"각 사람의 마피아 점수가 <b>매 라운드 오르내린다</b>"</p>
+            <p class="pf-detail">
+              <b>스포츠 베팅 배당률과 비슷하다.</b> 각 사람의 의심 점수(0~100%)가 정보 들어올 때마다 자동 갱신.
+              점수 가장 높은 사람이 의심 대상.
+            </p>
+
+            <div class="pf-example">
+              <h6>우리 마피아 게임에 적용하면</h6>
+              <ol class="pf-steps">
+                <li>게임 시작 — 모든 사람 의심 점수 <b>50%</b></li>
+                <li><b>P3 사망</b> → 살아남은 5명 점수가 자동 재계산</li>
+                <li><b>채팅</b>: P1이 "쟤 마피아 같아" → LLM이 분위기 읽고 P2 점수 ↑</li>
+                <li>매 라운드 <b>점수 막대가 변화</b> → 가장 높은 사람 처형</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="pf-side mechanism" data-anim="cardin">
+            <h5 class="pf-head">📐 논문의 핵심 메커니즘</h5>
+            <p class="pf-mech-intro">사람·역할·사건을 <b>그래프로 연결</b>해서 점수를 전파:</p>
+            <div class="pf-mech">
+              <div class="pf-mech-row">
+                <span class="pf-tag b1">Factor Graph</span>
+                <p><b>그물망 그래프</b> — 사람·역할·사건을 노드로, 관계를 선으로</p>
+              </div>
+              <div class="pf-mech-row">
+                <span class="pf-tag b2">Belief Propagation</span>
+                <p><b>점수 전파</b> — 한 노드 점수 바뀌면 연결된 노드도 자동 갱신</p>
+              </div>
+              <div class="pf-mech-row">
+                <span class="pf-tag b3">LLM Prior</span>
+                <p><b>LLM이 채팅 분석</b> → "더 의심 / 덜 의심 / 같음" 셋 중 하나로 변환</p>
+              </div>
+              <div class="pf-mech-row">
+                <span class="pf-tag b4">MAP Inference</span>
+                <p><b>점수 가장 높은 조합</b>을 정답으로 추정</p>
+              </div>
+            </div>
+            <p class="pf-note bay">
+              LLM이 작은 모델(Llama 8B)이어도 그래프가 보강해서 <b>671B 모델과 맞먹는다</b>.
+            </p>
+          </div>
+        </div>
+
+        <div class="pf-result bay" data-anim="fadeup">
+          <span class="pf-result-tag bay">📊 논문 검증 결과</span>
+          <p>
+            <b>AI 대 AI</b> · Avalon에서 <b>75% 승률</b> — DeepSeek-R1 671B(71%), GPT-o4-mini(40%) 능가.<br>
+            <b>사람 대결 (정확한 조건)</b> · 6인 Avalon · <b>AI 시민 3명 + 사람 시민 1명 vs 사람 마피아 2명</b>
+            · 15판에서 <b>시민팀 67% 승</b>. AI는 거짓말을 만드는 게 아니라
+            <b>거짓말하는 사람을 잡아내는 역할</b>로만 검증됨.
+          </p>
+        </div>
+
+        <p class="pf-meta">arXiv 2506.17788 · 2025.06 · Purdue CAMP Lab · Rahimirad et al.</p>
+      </section>
+
+      <!-- 12 · 기술적 차별점 ────────────────────────────── -->
+      <section class="s-plain s-tradeoff">
+        <p class="s-no">11 · 기술적 차별점</p>
+        <h2 class="s-h" data-anim="fadeup">
+          두 논문의 <span class="hi">진짜 차이</span>
+        </h2>
+        <p class="td-intro" data-anim="fadeup-delay">
+          같은 문제(SDG 역할 추론)를 풀지만 <b>알고리즘 메커니즘이 다르다</b>.
+          논문 본문 기반 6개 항목 비교.
+        </p>
+
+        <div class="td-grid">
+          <div class="td-axis" data-anim="cardin">
+            <span class="td-axis-tag">기준 ①</span>
+            <h4>어떻게 추리하나</h4>
+            <div class="td-axis-row">
+              <span class="td-side csp"><b>CSP4SDG</b><br>불가능 후보부터 지우고, 남은 후보에 점수</span>
+              <span class="td-vs">vs</span>
+              <span class="td-side bay"><b>GRAIL</b><br>그래프로 연결된 점수가 안정될 때까지 반복</span>
+            </div>
+          </div>
+
+          <div class="td-axis" data-anim="cardin">
+            <span class="td-axis-tag">기준 ②</span>
+            <h4>결과를 어떻게 내놓나</h4>
+            <div class="td-axis-row">
+              <span class="td-side csp"><b>CSP4SDG</b><br>각 사람 후보 + 점수 (왜 그런지 다 보임)</span>
+              <span class="td-vs">vs</span>
+              <span class="td-side bay"><b>GRAIL</b><br>가장 가능성 높은 역할 조합 1개</span>
+            </div>
+          </div>
+
+          <div class="td-axis" data-anim="cardin">
+            <span class="td-axis-tag">기준 ③</span>
+            <h4>LLM(채팅 분석)을 어떻게 쓰나</h4>
+            <div class="td-axis-row">
+              <span class="td-side csp"><b>CSP4SDG</b><br>LLM이 채팅을 4가지 제약 정보로 정리</span>
+              <span class="td-vs">vs</span>
+              <span class="td-side bay"><b>GRAIL</b><br>LLM이 각 사람을 "더 / 덜 / 같음" 3단계 평가</span>
+            </div>
+          </div>
+
+          <div class="td-axis" data-anim="cardin">
+            <span class="td-axis-tag">기준 ④</span>
+            <h4>학습 데이터가 필요한가</h4>
+            <div class="td-axis-row">
+              <span class="td-side csp"><b>CSP4SDG</b><br>0 필요. 룰만 알면 즉시 동작</span>
+              <span class="td-vs">vs</span>
+              <span class="td-side bay"><b>GRAIL</b><br>일부 부품에 신경망 학습 필요</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="td-facts" data-anim="fadeup">
+          <b>검증 팩트</b> ·
+          CSP4SDG는 Avalon · Mafia · Werewolf 3개 데이터셋에서 LLM 단독 모델 모두 능가 ·
+          GRAIL은 6인 Avalon · AI 시민 3명 vs 사람 마피아 2명 15판에서 시민팀 67% 승 (AI 시민 역할만 검증)
+        </p>
+      </section>
+
+      <!-- 13 · 양쪽 처리 흐름 ────────────────────────────── -->
+      <section class="s-plain s-flowcmp">
+        <p class="s-no">12 · 판단 흐름</p>
+        <h2 class="s-h" data-anim="fadeup">
+          두 알고리즘의 <span class="hi">처리 순서</span>
+        </h2>
+        <p class="fc-intro" data-anim="fadeup-delay">
+          <b>둘 다 같은 정보를 다 활용합니다</b> (사망 사실, 게임 룰, 채팅 발언, 가설 검증).
+          처리하는 <b class="hi-soft">위치만 다름</b>. <b class="hi">진짜 차이는 ★ 3단계의 계산 방식</b>.
+        </p>
+
+        <div class="flow-compare">
+          <!-- CSP 흐름 -->
+          <div class="flow-col csp" data-anim="cardin">
+            <div class="fc-head">
+              <span class="fc-acro">CSP4SDG</span>
+              <span class="fc-tag">메모장 방식</span>
+            </div>
+            <div class="fc-chain">
+              <div class="fc-step common">
+                <span class="fc-n">1</span>
+                <p><b>사실 받기</b><br><small>"P3 죽음 → 시민이었음" → 후보 칸에서 다른 역할 즉시 지움</small></p>
+              </div>
+              <div class="fc-arr">↓</div>
+              <div class="fc-step">
+                <span class="fc-n">2</span>
+                <p><b>채팅 분류</b><br><small>LLM이 발언을 <b>"4개 칸"</b>에 정리 (사실/룰/발언/가설)</small></p>
+              </div>
+              <div class="fc-arr">↓</div>
+              <div class="fc-step diff">
+                <span class="fc-n">3 ★</span>
+                <p><b>한 번에 점수 계산</b><br><small>남은 후보에 가중치 점수 — <b>식 한 번이면 끝</b></small></p>
+              </div>
+              <div class="fc-arr">↓</div>
+              <div class="fc-step final">
+                <span class="fc-n">4</span>
+                <p><b>사람별 의심 순위 출력</b><br><small>"P1 75% / P2 40% / P5 12%" 같은 점수 막대</small></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- GRAIL 흐름 -->
+          <div class="flow-col bay" data-anim="cardin">
+            <div class="fc-head">
+              <span class="fc-acro">GRAIL</span>
+              <span class="fc-tag">점수판 방식 · 마피아 적용</span>
+            </div>
+            <div class="fc-chain">
+              <div class="fc-step common">
+                <span class="fc-n">1</span>
+                <p><b>사실 받기</b><br><small>"P3 죽음 → 시민이었음" → 그래프에 <b>확정 사실로 박음</b></small></p>
+              </div>
+              <div class="fc-arr">↓</div>
+              <div class="fc-step">
+                <span class="fc-n">2</span>
+                <p><b>채팅 분류</b><br><small>LLM이 각 사람을 <b>"더 / 덜 / 같음" 3단계</b>로 평가</small></p>
+              </div>
+              <div class="fc-arr">↓</div>
+              <div class="fc-step diff">
+                <span class="fc-n">3 ★</span>
+                <p><b>점수가 그래프 따라 퍼짐</b><br><small>이웃 노드끼리 점수 주고받으며 <b>안정될 때까지 반복</b> (최대 20회)<br>→ <b>"이웃 노드"가 뭔지 ↓ 박스 참조</b></small></p>
+              </div>
+              <div class="fc-arr">↓</div>
+              <div class="fc-step final">
+                <span class="fc-n">4</span>
+                <p><b>가장 가능성 높은 역할 조합 출력</b><br><small>"P1 = 마피아, P2 = 경찰 ..." 한 줄 답</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="nb-example" data-anim="fadeup">
+          <h5 class="nb-head">💡 "이웃 노드"가 뭐? — 마피아 게임으로 풀면</h5>
+          <div class="nb-body">
+            <div class="nb-step">
+              <span class="nb-num">①</span>
+              <p><b>P1이 "P2 마피아야!" 발언</b>
+                → 그래프에서 <b>[P1 역할] ↔ [P2 역할]</b>이 <b>이웃</b>으로 연결됨</p>
+            </div>
+            <div class="nb-arr">↓</div>
+            <div class="nb-step">
+              <span class="nb-num">②</span>
+              <p>LLM이 "P1 신뢰감 ↑" 판단 → <b>P1의 시민 점수 ↑</b></p>
+            </div>
+            <div class="nb-arr">↓</div>
+            <div class="nb-step">
+              <span class="nb-num">③</span>
+              <p>이웃인 <b>P2의 마피아 점수가 자동 ↑</b>
+                (시민이 비난한 사람이면 마피아일 가능성 ↑)</p>
+            </div>
+            <div class="nb-arr">↓</div>
+            <div class="nb-step">
+              <span class="nb-num">④</span>
+              <p>P2와 이웃인 <b>P5 점수도 갱신</b> (P2가 어제 옹호했던 사람이면 같은 편 가능성)
+                → 그래프 전체에 도미노처럼 퍼짐</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 13 · 시뮬 화면 ────────────────────────────── -->
+      <section class="s-plain">
+        <p class="s-no">13 · 보여줄 화면</p>
+        <h2 class="s-h" data-anim="fadeup">AI 추리 과정을 옆에서 본다</h2>
+        <div class="mock-wrap" data-anim="cardin">
+          <div class="mock">
+            <div class="mock-bar">
+              <span class="mb-dot red"></span>
+              <span class="mb-dot yel"></span>
+              <span class="mb-dot grn"></span>
+              <span class="mb-title">AI P3의 머릿속 — "사람일까 AI일까, 누가 마피아일까"</span>
+            </div>
+            <div class="mock-body">
+              <div class="mock-sec">
+                <h6>의심 순위</h6>
+                <div class="mb-row"><span>P1</span><span class="mb-bar"><i style="width:75%"></i></span><span class="mb-pct">75%</span></div>
+                <div class="mb-row"><span>P2</span><span class="mb-bar"><i style="width:40%"></i></span><span class="mb-pct">40%</span></div>
+                <div class="mb-row"><span>P5</span><span class="mb-bar"><i style="width:12%"></i></span><span class="mb-pct">12%</span></div>
+              </div>
+              <div class="mock-sec">
+                <h6>지운 가능성</h6>
+                <p class="mb-text">P5 ≠ 마피아 — 어제 P1과 같이 죽었음<br>P2 ≠ 경찰 — 발표와 모순</p>
+              </div>
+              <div class="mock-sec">
+                <h6>다음 행동</h6>
+                <p class="mb-act">→ P1에게 투표</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 11 · 로드맵 ────────────────────────────── -->
+      <section class="s-plain">
+        <p class="s-no">14 · 일정</p>
+        <h2 class="s-h" data-anim="fadeup">이렇게 만들어 갑니다</h2>
+        <div class="rm-list">
+          <div class="rm done" data-anim="cardin">
+            <span class="rm-when">Phase 1</span>
+            <span class="rm-st">✓ 완료</span>
+            <p>로그인 · 로비 · 멀티모듈 빌드 · 채팅 서버 · 더미 시뮬</p>
+          </div>
+          <div class="rm now" data-anim="cardin">
+            <span class="rm-when">Phase 1.5</span>
+            <span class="rm-st">진행 중</span>
+            <p>3진영 룰 · 클레임 발언 시스템 · 게임 엔진 · <b>사람·AI 혼합 매칭</b></p>
+          </div>
+          <div class="rm next" data-anim="cardin">
+            <span class="rm-when">Phase 2</span>
+            <span class="rm-st">예정</span>
+            <p>CSP 또는 Bayesian 추리 AI · <b>사람 vs AI 대전 모드</b> · 통계</p>
+          </div>
+          <div class="rm later" data-anim="cardin">
+            <span class="rm-when">Phase 3</span>
+            <span class="rm-st">미래</span>
+            <p>LLM 자유 발언 AI · <b>사람과 자연어 대화 가능</b></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 12 · End ────────────────────────────── -->
+      <section class="s-title s-end">
+        <div class="t-wrap">
+          <p class="t-eyebrow" data-anim="fadeup">감사합니다</p>
+          <h1 class="t-hero" data-anim="fadeup-delay">
+            <span class="t-italic">Questions?</span>
+          </h1>
+          <p class="t-tag" data-anim="fadeup-late">
+            github.com/b-hyoung/Mafia_For_Java
+          </p>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+  <script type="importmap">
+    { "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script type="module" src="assets/main.js"></script>
+</body>
+</html>
